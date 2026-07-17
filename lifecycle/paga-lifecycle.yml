@@ -1,0 +1,22 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/ + https://status.paga.com
+description: >-
+  Versioning, status, and deprecation posture for the Paga developer platform,
+  from the searched developer docs and the live Statuspage. Paga versions
+  selected operations in the URI path (e.g. /refund/v2) rather than a global
+  API version. No formal published deprecation policy or Sunset/Deprecation
+  (RFC 8594) header support was found at review time.
+versioning:
+  scheme: uri-path
+  evidence: /refund/v2 (v2 of the Collect refund operation) coexists with unversioned operations.
+  global_version: false
+status_page: https://status.paga.com
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or Sunset/Deprecation header support confirmed.
+sla:
+  url: null
+  uptime_target: null
+deprecated_operations: []

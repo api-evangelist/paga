@@ -1,0 +1,112 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/Paga-Developer-Community
+description: >-
+  First-party Paga client libraries published under the Paga-Developer-Community
+  GitHub organization. Paga distributes SDKs as source repositories (not via
+  package registries such as npm/PyPI/Maven Central at review time), grouped by
+  product surface (Business, Collect, Direct Debit, Merchant, Connect) and by
+  language (Java, Python, Node.js/JavaScript, PHP), plus e-commerce checkout
+  plugins. Install by cloning or vendoring the repository.
+packages:
+# --- Business API ---
+- language: java
+  registry: github
+  name: paga-business-library
+  product: Paga Business API
+  url: https://github.com/Paga-Developer-Community/paga-business-library
+  official: true
+- language: python
+  registry: github
+  name: paga_business_python_library
+  product: Paga Business API
+  url: https://github.com/Paga-Developer-Community/paga_business_python_library
+  official: true
+- language: javascript
+  registry: github
+  name: paga-business-node
+  product: Paga Business API
+  url: https://github.com/Paga-Developer-Community/paga-business-node
+  official: true
+- language: php
+  registry: github
+  name: paga-business-library-php
+  product: Paga Business API
+  url: https://github.com/Paga-Developer-Community/paga-business-library-php
+  official: true
+# --- Collect API ---
+- language: java
+  registry: github
+  name: paga-collect-java-lib
+  product: Paga Collect API
+  url: https://github.com/Paga-Developer-Community/paga-collect-java-lib
+  official: true
+- language: python
+  registry: github
+  name: paga-collect-python-lib
+  product: Paga Collect API
+  url: https://github.com/Paga-Developer-Community/paga-collect-python-lib
+  official: true
+- language: javascript
+  registry: github
+  name: paga-collect-node-lib
+  product: Paga Collect API
+  url: https://github.com/Paga-Developer-Community/paga-collect-node-lib
+  official: true
+- language: php
+  registry: github
+  name: paga-collect-php-lib
+  product: Paga Collect API
+  url: https://github.com/Paga-Developer-Community/paga-collect-php-lib
+  official: true
+# --- Merchant Services ---
+- language: php
+  registry: github
+  name: paga-merchant-service-library
+  product: Paga Merchant Services
+  url: https://github.com/Paga-Developer-Community/paga-merchant-service-library
+  official: true
+- language: python
+  registry: github
+  name: paga_merchant_python_library
+  product: Paga Merchant Services
+  url: https://github.com/Paga-Developer-Community/paga_merchant_python_library
+  official: true
+- language: javascript
+  registry: github
+  name: paga-merchant-node
+  product: Paga Merchant Services
+  url: https://github.com/Paga-Developer-Community/paga-merchant-node
+  official: true
+# --- Paga Connect (OAuth hosted checkout) ---
+- language: php
+  registry: github
+  name: paga-connect-library
+  product: Paga Connect
+  url: https://github.com/Paga-Developer-Community/paga-connect-library
+  official: true
+- language: python
+  registry: github
+  name: paga_connect_python_library
+  product: Paga Connect
+  url: https://github.com/Paga-Developer-Community/paga_connect_python_library
+  official: true
+- language: javascript
+  registry: github
+  name: paga-connect-node
+  product: Paga Connect
+  url: https://github.com/Paga-Developer-Community/paga-connect-node
+  official: true
+# --- E-commerce checkout plugins ---
+- language: php
+  registry: github
+  name: paga-checkout-for-woocommerce
+  product: Paga Checkout (WooCommerce plugin)
+  url: https://github.com/Paga-Developer-Community/paga-checkout-for-woocommerce
+  official: true
+- language: php
+  registry: github
+  name: paga-checkout-magento-plugin
+  product: Paga Checkout (Magento 2 plugin)
+  url: https://github.com/Paga-Developer-Community/paga-checkout-magento-plugin
+  official: true

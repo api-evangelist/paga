@@ -124,6 +124,50 @@ common:
   url: rate-limits/paga-rate-limits.yml
 - type: FinOps
   url: finops/paga-finops.yml
+- type: Packages
+  url: packages/paga-packages.yml
+- type: SDKs
+  url: packages/paga-packages.yml
+- type: MCPServer
+  url: mcp/paga-mcp.yml
+- type: LLMsTxt
+  url: llms/paga-llms.txt
+- type: Overlay
+  url: overlays/paga-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/paga-conformance.yml
+- type: Compliance
+  url: security/paga-trust-center.yml
+- type: ErrorCatalog
+  url: errors/paga-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/paga-lifecycle.yml
+- type: StatusPage
+  url: https://status.paga.com
+- type: Sandbox
+  url: sandbox/paga-sandbox.yml
+- type: Conventions
+  url: conventions/paga-conventions.yml
+- type: Idempotency
+  url: conventions/paga-conventions.yml
+- type: Components
+  url: components/paga-components.yml
+- type: DataModel
+  url: data-model/paga-data-model.yml
+- type: Webhooks
+  url: asyncapi/paga-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://developer-docs.paga.com/
+- type: Quickstart
+  url: https://developer-docs.paga.com/docs/create-an-account
+- type: Support
+  url: https://www.paga.com/contact
+- type: Blog
+  url: https://paga.blog/
+- type: TermsOfService
+  url: https://www.paga.com/terms
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/docs/paga-collect-api-status-code + https://developer-docs.paga.com/docs/checkout-inline
+spec_type: Webhooks
+description: >-
+  Paga's event/callback surface. Paga does not publish an AsyncAPI document;
+  events are delivered as HTTP callbacks to a per-request callback URL. The
+  Collect API POSTs a callback to the payment request's callBackUrl on
+  fulfilment, and Paga Checkout POSTs to the widget's callback_url after
+  payment. There is no subscription API - the callback destination is supplied
+  per transaction.
+delivery:
+  transport: HTTP POST
+  callback_url_fields: [callBackUrl, callbackUrl, callback_url, data-callback_url]
+  auth: >-
+    Merchants should validate the payload against the transaction status by
+    calling the status/query operation; callbacks are unauthenticated by default.
+events:
+- {name: PAYMENT_COMPLETE, description: The payer paid the full requested amount for a payment request.}
+- {name: PARTIAL_PAYMENT, description: The payer paid part of the requested amount.}
+- {name: PAYMENT_REQUEST_EXPIRED, description: The payment request expired before fulfilment.}
+- {name: PAYMENT_ERROR, description: An error occurred while fulfilling the payment request; the payment was unsuccessful.}
+related_status_codes:
+- {code: 1, name: IN_PROCESS, note: A webhook callback is sent once processing completes.}
+- {code: 2, name: PARTIAL_PAYMENT, note: Returned from the callback notification for a partial payment.}
+notes: >-
+  Verify fulfilment out-of-band with checkStatus (Collect) / getOperationStatus
+  (Business) rather than trusting the callback alone; see conventions/.

@@ -1,0 +1,46 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/paga-openapi.yml + https://developer-docs.paga.com/ + security/paga-trust-center.yml
+description: >-
+  Cross-cutting and industry standards Paga's developer surface conforms to,
+  derived from the modeled OpenAPI and the searched developer/corporate docs.
+  Payment/compliance posture (PCI DSS, CBN licensing, NDPR) is asserted from
+  Paga's corporate and developer pages; see security/paga-trust-center.yml.
+standards:
+- id: oauth2
+  conforms: partial
+  evidence: >-
+    Paga Connect is an OAuth 2.0 hosted-checkout flow; the core Business /
+    Collect / Direct Debit REST APIs use principal+credentials headers plus a
+    per-request SHA-512 hash, not OAuth.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are integer responseCode/statusCode in a JSON body, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt served (see well-known/paga-well-known.yml).
+- id: idempotency
+  conforms: true
+  evidence: Client-generated unique referenceNumber dedupes transactions; duplicates rejected with error 105.
+- id: webhooks
+  conforms: true
+  evidence: Collect API sends callback events (PAYMENT_COMPLETE, PARTIAL_PAYMENT, PAYMENT_REQUEST_EXPIRED, PAYMENT_ERROR).
+- id: pci-dss
+  conforms: true
+  evidence: Card acceptance via Paga Checkout is subject to PCI DSS; asserted on corporate pages.
+- id: cbn-licensed
+  conforms: true
+  evidence: Pagatech Financial Services Limited is licensed by the Central Bank of Nigeria as a Mobile Money Operator.
+- id: ndpr
+  conforms: true
+  evidence: Customer data handling subject to Nigeria Data Protection Regulation.
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false
+- id: json-api
+  conforms: false

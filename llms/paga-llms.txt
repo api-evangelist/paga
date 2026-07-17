@@ -1,0 +1,25 @@
+# Paga API Documentation Documentation
+
+> Documentation for Paga API Documentation
+
+## Guides
+- [Create a Paga Business Account](https://developer-docs.paga.com/docs/create-an-account.md): Set up a new Business account
+- [Test Data](https://developer-docs.paga.com/docs/testing.md)
+- [Overview](https://developer-docs.paga.com/docs/overview-1.md)
+- [Checkout JS](https://developer-docs.paga.com/docs/checkout-js.md): Simple JS script to start checkout
+- [Checkout link](https://developer-docs.paga.com/docs/checkout-link.md): Simplify payments with a simple link!
+- [Checkout Inline](https://developer-docs.paga.com/docs/checkout-inline.md): Simplify payments with Paga Checkout!
+- [Dynamic Payment Identifier](https://developer-docs.paga.com/docs/virtual-accounts.md): One-time use payment identifier for receiving payment
+- [Persistent Payment Identifier](https://developer-docs.paga.com/docs/persistent-wallet-account.md): Generate a Paga persistent payment identifier for your customers
+- [Bank USSD](https://developer-docs.paga.com/docs/bank-ussd-payment.md): One-time use Bank USSD for payment
+- [Direct Debit API](https://developer-docs.paga.com/docs/direct-debit-api.md)
+- [Subsidiary Accounts](https://developer-docs.paga.com/docs/subsidiary-accounts.md): Paga accounts for your customers, fully managed by you. Issue, hold, and move money on behalf of your end users – all from your Paga business account.
+- [Airtime and Data Purchase](https://developer-docs.paga.com/docs/airtime-and-data-purchase.md)
+- [Collect API Operations](https://developer-docs.paga.com/docs/operations-1.md)
+- [Collect API Status Codes](https://developer-docs.paga.com/docs/paga-collect-api-status-code.md)
+- [Java Library](https://developer-docs.paga.com/docs/java-library-4.md)
+- [Business API Operations](https://developer-docs.paga.com/docs/business-rest-api-operations.md): Paga Business API operation provides all relevant endpoints needed to complete a debit transaction on the partner's account. If your use case includes Money Transfer to Paga or Bank Account, Cashout at Agent, Value added service (Bill payment, Airtime and Mobile Data) etc.
+- [Business API Error Codes](https://developer-docs.paga.com/docs/error-codes.md)
+- [Business API Java Library](https://developer-docs.paga.com/docs/java-library-2.md)
+- [Business API Python Library](https://developer-docs.paga.com/docs/python-library-2.md)
+- [Business API Node Library](https://developer-docs.paga.com/docs/node-library-2.md)

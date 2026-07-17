@@ -1,0 +1,54 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/paga-openapi.yml + https://developer-docs.paga.com/docs/operations-1
+description: >-
+  Entity-relationship model derived from the modeled Paga OpenAPI schemas and
+  id-reference fields, plus the searched Collect operations reference. Paga ties
+  most records together by a client-supplied referenceNumber and, for persistent
+  accounts, an accountReference.
+entities:
+- name: PaymentRequest
+  key: referenceNumber
+  description: A Collect request for payment fulfilled by a payer via bank transfer, USSD, card, agent, or Paga wallet.
+  fields: [referenceNumber, amount, currency, payer, payee, expiryDateTimeUTC, paymentMethods, callBackUrl]
+  states: [PENDING, CHARGEABLE, CONSUMED, EXPIRED, FAILED, CANCELLED]
+- name: PersistentPaymentAccount
+  key: accountReference
+  description: A reusable NUBAN account number assigned to a customer for recurring collection.
+  fields: [referenceNumber, accountReference, accountName, phoneNumber, financialIdentificationNumber, creditBankId, creditBankAccountNumber]
+- name: Mandate
+  key: accountReference
+  description: A tokenized customer bank account authorized for one-time or recurring direct-debit charges.
+  fields: [referenceNumber, accountReference, amount]
+- name: Party
+  description: A payer or payee on a payment request.
+  fields: [name, phoneNumber, bankId, accountNumber, financialIdentificationNumber]
+- name: Transaction
+  key: referenceNumber
+  description: A Business-API money movement (transfer, airtime, merchant/bill payment, deposit).
+  fields: [referenceNumber, amount, currency, transactionId]
+- name: Customer
+  description: A Paga customer wallet created on behalf of an organization.
+  fields: [customerPhoneNumber, customerFirstName, customerLastName, customerEmail, customerDateOfBirth]
+- name: Bank
+  key: bankId
+  description: A supported destination bank with a Paga bank UUID.
+  fields: [bankId, name]
+- name: MobileOperator
+  key: mobileOperatorPublicId
+  description: A supported airtime/data mobile operator.
+  fields: [mobileOperatorPublicId, name]
+relationships:
+- {from: PaymentRequest, to: Party, type: has_one, via: payer}
+- {from: PaymentRequest, to: Party, type: has_one, via: payee}
+- {from: Party, to: Bank, type: belongs_to, via: bankId}
+- {from: PersistentPaymentAccount, to: Bank, type: belongs_to, via: creditBankId}
+- {from: Mandate, to: PersistentPaymentAccount, type: belongs_to, via: accountReference}
+- {from: Transaction, to: Bank, type: belongs_to, via: destinationBank}
+- {from: Transaction, to: MobileOperator, type: belongs_to, via: mobileOperatorPublicId}
+- {from: Transaction, to: Customer, type: belongs_to, via: customerPhoneNumber}
+identifiers:
+- {field: referenceNumber, domain: client-generated unique transaction reference, max_length: 50}
+- {field: accountReference, domain: client identifier for a persistent account / mandate}
+- {field: bankId, domain: Paga bank UUID}
+- {field: transactionId, domain: Paga-assigned transaction id}

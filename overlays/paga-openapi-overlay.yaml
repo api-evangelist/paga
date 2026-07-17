@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Paga Developer API
+  version: 1.0.0
+# Provenance: generated 2026-07-17, method generated.
+# Captures API Evangelist enrichment metadata as an Overlay so the harvested
+# openapi/paga-openapi.yml is never mutated. Grounded in the searched Paga
+# developer docs (error codes, callback events, test data, idempotency via
+# unique referenceNumber).
+extends: openapi/paga-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-17'
+    x-idempotency:
+      supported: true
+      mechanism: client-generated unique referenceNumber
+      duplicate-response: 'Business error 105 (Duplicate reference)'
+      max-length: 50
+    x-webhooks:
+      supported: true
+      events: [PAYMENT_COMPLETE, PARTIAL_PAYMENT, PAYMENT_REQUEST_EXPIRED, PAYMENT_ERROR]
+      docs: https://developer-docs.paga.com/docs/paga-collect-api-status-code
+- target: $.info
+  update:
+    x-sandbox:
+      test-hosts:
+      - https://beta.mypaga.com
+      - https://beta-collect.paga.com
+      - https://beta-checkout.paga.com
+      docs: https://developer-docs.paga.com/docs/testing
+- target: $.components
+  update:
+    x-error-catalog: errors/paga-error-codes.yml
+    x-conventions: conventions/paga-conventions.yml

@@ -1,0 +1,26 @@
+generated: '2026-07-17'
+method: searched
+source: live probes of Paga hosts (2026-07-17)
+description: >-
+  Probe of the /.well-known/ discovery surface across Paga's website, developer
+  docs, Business API, and Collect API hosts. No well-known documents were served
+  at review time (no security.txt, no OpenID/OAuth discovery, no api-catalog,
+  no ai-plugin). Absence is recorded honestly; no raw files were saved because
+  no probe returned 200. Note: a real llms.txt IS served at
+  https://developer-docs.paga.com/llms.txt (captured under llms/).
+hosts:
+- host: https://developer-docs.paga.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://www.paga.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+- host: https://www.mypaga.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+- host: https://collect.paga.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}

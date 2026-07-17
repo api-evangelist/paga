@@ -1,0 +1,89 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/docs/error-codes and https://developer-docs.paga.com/docs/paga-collect-api-status-code
+description: >-
+  Paga response-code registry. Paga does not use RFC 9457 problem+json; every
+  operation returns a JSON body carrying an integer responseCode (Business API)
+  or statusCode (Collect API) plus a human message. responseCode 0 means
+  success; negative and positive non-zero codes indicate specific failures.
+  This is the non-payments-scheme error registry (see conventions/ for the
+  envelope shape). Card-level decline reasons are exposed only through the
+  hosted checkout / test cards, not as a documented decline-code table.
+format: paga-response-code
+envelope:
+  business:
+    field: responseCode
+    success_value: 0
+    message_field: message
+  collect:
+    field: statusCode
+    success_value: 0
+    message_field: message
+business_error_codes:
+- {code: 0, meaning: Success}
+- {code: 1, meaning: Money Transfer Bulk - Partial Success, Empty Request}
+- {code: 2, meaning: Money Transfer Bulk - All Failed}
+- {code: 3, meaning: Pending}
+- {code: 4, meaning: Deposit to bank - Invalid Account Number}
+- {code: -1, meaning: Unknown error}
+- {code: -2, meaning: Unsupported operation}
+- {code: -3, meaning: Invalid bulk operation size}
+- {code: -4, meaning: Missing reference number}
+- {code: -8, meaning: Missing process type}
+- {code: -9, meaning: Invalid process type}
+- {code: 101, meaning: Invalid Bank}
+- {code: 103, meaning: Disabled or Inactive account}
+- {code: 104, meaning: Invalid Principal in use}
+- {code: 105, meaning: Duplicate reference}
+- {code: 106, meaning: Invalid Source Of Funds}
+- {code: 107, meaning: Invalid Recipient Account}
+- {code: 108, meaning: Invalid Organization User}
+- {code: 109, meaning: Buy Airtime Error}
+- {code: 110, meaning: Invalid Organization}
+- {code: 111, meaning: Invalid Customer}
+- {code: 112, meaning: Invalid Biller Name or Biller Service does not exist}
+- {code: 113, meaning: Invalid User}
+- {code: 114, meaning: Invalid Account}
+- {code: 115, meaning: Invalid Bank Account}
+- {code: 116, meaning: Invalid Amount}
+- {code: 117, meaning: Missing Required Parameter}
+- {code: 118, meaning: Invalid User Identifier}
+- {code: 119, meaning: Invalid Process}
+- {code: 120, meaning: Photo Already Set}
+- {code: 121, meaning: Invalid Image Type}
+- {code: 122, meaning: Invalid Identification Details}
+- {code: 123, meaning: Invalid Phone Number}
+- {code: 124, meaning: Invalid First Name}
+- {code: 125, meaning: Invalid Last Name}
+- {code: 126, meaning: Invalid Username}
+- {code: 127, meaning: Invalid Email}
+- {code: 128, meaning: Email Already Exist}
+- {code: 129, meaning: Locked User Account}
+- {code: 130, meaning: Invalid name}
+- {code: 131, meaning: Invalid Merchant}
+- {code: 132, meaning: Invalid Process Channel}
+- {code: 133, meaning: Can not find destination bank}
+- {code: 134, meaning: Invalid date of birth}
+- {code: 135, meaning: Unknown Reference number}
+- {code: 136, meaning: Exceed Transaction Limit}
+- {code: 137, meaning: Below Minimum Transaction Limit}
+- {code: 138, meaning: Exceed account limit}
+- {code: 139, meaning: Insufficient Balance}
+- {code: 140, meaning: Reference number exceeds maximum length of 50 characters}
+collect_status_codes:
+- {code: 0, name: SUCCESS, meaning: The request was processed successfully}
+- {code: 1, name: IN_PROCESS, meaning: Received and queued; a webhook callback is sent once processed, or query status}
+- {code: 2, name: PARTIAL_PAYMENT, meaning: Callback indicates a partial payment was received (if permitted by initiator)}
+- {code: -1, name: SYSTEM_ERROR, meaning: Error processing the current request}
+- {code: -2, name: REQUEST_EXPIRED, meaning: The payment request has expired}
+- {code: -3, name: REQUEST_CANCELLED, meaning: The payment request has been cancelled}
+- {code: 114, name: FAILED, meaning: Request failed}
+- {code: 115, name: FAILED, meaning: Non-refundable fulfilled payment request}
+- {code: 121, name: NOT_FOUND, meaning: Payment request reference number not found}
+payment_request_states:
+- {state: PENDING, meaning: Received and awaiting authorization/fulfilment from the payer}
+- {state: CHARGEABLE, meaning: Payment received; request can now be consumed}
+- {state: CONSUMED, meaning: Payment request charge completed}
+- {state: EXPIRED, meaning: Payment request has expired}
+- {state: FAILED, meaning: Payment request creation failed}
+- {state: CANCELLED, meaning: Payment request was cancelled}

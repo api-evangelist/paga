@@ -1,0 +1,65 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/docs/testing
+description: >-
+  Paga sandbox / test-data reference. Paga separates test from live by HOST
+  (beta.* subdomains) rather than by key prefix; you obtain a separate test key
+  set (public key, secret key, hash key) from the Business dashboard. The values
+  below are published verbatim by Paga for integration testing and must never be
+  used in production.
+environments:
+  live:
+    business_api: https://www.mypaga.com
+    collect_api: https://collect.paga.com
+    checkout: https://checkout.paga.com
+  test:
+    business_api: https://beta.mypaga.com
+    collect_api: https://beta-collect.paga.com
+    checkout: https://beta-checkout.paga.com
+test_bank_account:
+  bank: Access Bank
+  account_number: '0000000000'
+test_paga_accounts:
+- {account: '0361222682', username: Ramon}
+- {account: '3300932297', username: Ramon}
+test_cards_success:
+- {type: Visa 3DS authentication, number: '4187427415564246', expiry: 09/32, cvv: '828', pin: '3310', otp: '12345'}
+- {type: Visa 3DS authentication 2, number: '4242424242424242', expiry: 09/32, cvv: '812', otp: '12345'}
+- {type: Visa 3DS authentication 3, number: '4751763236699647', expiry: 09/35, cvv: '812', otp: '12345'}
+- {type: MasterCard 3DS authentication, number: '5438898014560229', expiry: 10/31, cvv: '564', pin: '3310', otp: '12345'}
+- {type: Verve Card Noauth, number: '5061460410120223210', expiry: 10/32, cvv: '780', pin: '3310', otp: '12345'}
+- {type: Verve Card PIN authentication 2, number: '5061460166976054667', expiry: 10/32, cvv: '780', pin: '3310', otp: '12345'}
+test_cards_failure:
+- {type: Card Declined (Address Verification), number: '5143010522339965', expiry: 08/32, cvv: '276', pin: '3310', otp: '12345'}
+- {type: Card Fraudulent, number: '5590131743294314', expiry: 11/32, cvv: '887', pin: '3310', otp: '12345'}
+- {type: Card Insufficient Funds, number: '5258585922666506', expiry: 09/31, cvv: '883', pin: '3310', otp: '12345'}
+- {type: Do Not Honour, number: '5143010522339965', expiry: 08/31, cvv: '276', pin: '3310'}
+- {type: Invalid Transaction, number: '5551658157653822', expiry: 08/31, cvv: '887'}
+- {type: Restricted Card Retain Card, number: '5258582054729020', expiry: 08/31, cvv: '887'}
+- {type: Function Not Permitted to Cardholder, number: '5258588264565682', cvv: '887'}
+- {type: Transaction Error, number: '5258589130149016', cvv: '887'}
+- {type: Incorrect PIN, number: '5399834697894723', expiry: 09/31, cvv: '883', pin: '3310', otp: '12345'}
+- {type: Verve Card enrolment, number: '5531882884804517', expiry: 09/32, cvv: '564', pin: '3310'}
+test_checkout_sample_card:
+  number: '5531886652142950'
+  expiry: 09/32
+  cvv: '555'
+test_utilities:
+  electricity:
+  - {biller: Eko Disco (EKEDC), prepaid: '051001055411', postpaid: '051001055411'}
+  - {biller: Ikeja Electric (IKEDC), prepaid: '04040406714', postpaid: '051001055401'}
+  - {biller: Abuja Disco (AEDC), prepaid: '02178029704', postpaid: '719323966'}
+  - {biller: Kano Disco (KEDCO), prepaid: '62130093701', postpaid: '3615407069701'}
+  - {biller: Ibadan Disco (IBEDC), prepaid: '45701411444', postpaid: '45701411444'}
+  paytv:
+  - {biller: DSTV, account: '4115702261'}
+  - {biller: GoTV, account: '2004464949'}
+  - {biller: Startime, account: '02027137167'}
+  isp:
+  - {biller: Smile, account: '110121'}
+  - {biller: Swift, account: '1203000002'}
+  - {biller: Spectranet, account: '18182732'}
+notes: >-
+  Test and live credentials are issued separately from the Paga Business
+  dashboard (Developer Tools > API keys). Business API access additionally
+  requires IP whitelisting even in test.

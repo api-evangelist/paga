@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/paga-openapi.yml + conventions/paga-conventions.yml + errors/paga-error-codes.yml
+description: >-
+  Packaged Agent Skills for the Paga developer platform - short operating
+  instructions grounded in real operationIds from the modeled OpenAPI, plus the
+  hash-signing, idempotency (unique referenceNumber), and error-code rules.
+skills:
+- file: paga-collect-payment.md
+  name: Collect a payment with Paga
+  api: openapi/paga-openapi.yml
+  operations: [getCollectBanks, requestPayment, checkStatus, refundPaymentV2]
+- file: paga-persistent-account.md
+  name: Issue a persistent payment account
+  api: openapi/paga-openapi.yml
+  operations: [registerPersistentPaymentAccount, getPersistentPaymentAccount, updatePersistentPaymentAccount, deletePersistentPaymentAccount]
+- file: paga-disburse-funds.md
+  name: Disburse funds with the Paga Business API
+  api: openapi/paga-openapi.yml
+  operations: [getBusinessBanks, validateDepositToBank, depositToBank, moneyTransfer, getOperationStatus, accountBalance]
+- file: paga-direct-debit.md
+  name: Set up and charge a direct-debit mandate
+  api: openapi/paga-openapi.yml
+  operations: [requestPayment, chargeDebitMandate, getChargeMandateStatus, disableMandate]

@@ -1,0 +1,66 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/docs/handling-hash + https://developer-docs.paga.com/docs/operations-1 + openapi/paga-openapi.yml
+description: >-
+  Cross-cutting request/response semantics for the Paga developer platform,
+  from the searched developer docs and derived from the modeled OpenAPI. Covers
+  authentication, request signing, idempotency, the error envelope, pagination,
+  webhooks/callbacks, and versioning. Cross-links errors/, lifecycle/,
+  authentication/, and rate-limits/.
+authentication:
+  business_api:
+    style: header keys
+    headers: [principal, credentials, hash]
+    ip_whitelisting: required
+  collect_and_direct_debit:
+    style: HTTP Basic + hash header
+    basic: base64(publicKey:secretKey)
+    headers: [Authorization, hash]
+  ref: authentication/paga-authentication.yml
+request_signing:
+  header: hash
+  algorithm: SHA-512
+  rule: >-
+    SHA-512 over an operation-specific ordered concatenation of request
+    parameters followed by the account hash key (no separators). The hash key
+    is never transmitted. Each operation documents its own field order.
+  docs: https://developer-docs.paga.com/docs/handling-hash
+idempotency:
+  supported: true
+  mechanism: client-generated unique referenceNumber
+  scope: per operation / per organization
+  duplicate_behavior: >-
+    Re-submitting a previously used referenceNumber is rejected; the Business
+    API returns error code 105 (Duplicate reference). Use the same
+    referenceNumber to safely query status of an in-flight transaction rather
+    than re-initiating it.
+  constraints:
+    max_length: 50
+    duplicate_error_code: 105
+  docs: https://developer-docs.paga.com/docs/error-codes
+pagination:
+  style: date-range filter
+  params: [startDateTimeUTC, endDateTimeUTC, startDateUTC, endDateUTC]
+  notes: >-
+    History operations filter by a date range (Collect history is capped at a
+    maximum three-month window). No cursor/offset paging is documented.
+transport:
+  protocol: HTTPS only
+  method: POST (JSON request bodies for all operations)
+  content_type: application/json
+error_envelope:
+  business: {code_field: responseCode, success_value: 0, message_field: message}
+  collect: {code_field: statusCode, success_value: 0, message_field: message}
+  ref: errors/paga-error-codes.yml
+webhooks:
+  supported: true
+  mechanism: callback URL per payment request / checkout (callBackUrl, callback_url)
+  events: [PAYMENT_COMPLETE, PARTIAL_PAYMENT, PAYMENT_REQUEST_EXPIRED, PAYMENT_ERROR]
+  ref: asyncapi/paga-webhooks.yml
+versioning:
+  scheme: uri-path
+  ref: lifecycle/paga-lifecycle.yml
+rate_limits:
+  ref: rate-limits/paga-rate-limits.yml
+currency: NGN
+regions: [Nigeria]

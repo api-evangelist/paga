@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: searched
+source: https://developer-docs.paga.com/docs/checkout-inline + checkout-js + checkout-link
+description: >-
+  Client-side / embeddable checkout components Paga publishes for collecting
+  card, wallet, bank-transfer, agent, and USSD payments without integrating the
+  server-side Collect API directly. Distinct from the server SDKs in packages/.
+families:
+- family: Paga Checkout
+  description: Hosted payment gateway loaded into an iFrame; customer completes payment and returns to the merchant.
+  loaders:
+  - name: Checkout Inline
+    type: html-form-script
+    src: https://checkout.paga.com/checkout/
+    test_src: https://beta-checkout.paga.com/checkout/
+    docs: https://developer-docs.paga.com/docs/checkout-inline
+    params: [data-public_key, data-amount, data-currency, data-payment_reference, data-charge_url, data-phone_number, data-email, data-display_image, data-callback_url, data-funding_sources]
+  - name: Checkout JS
+    type: javascript
+    entry: startPayment()
+    docs: https://developer-docs.paga.com/docs/checkout-js
+    params: [public_key, amount, currency, payment_reference, charge_url, phone_number, email, display_image, callback_url, funding_sources]
+  - name: Checkout Link
+    type: hosted-link
+    base: https://checkout.paga.com/checkout/params
+    test_base: https://beta-checkout.paga.com/checkout/params
+    docs: https://developer-docs.paga.com/docs/checkout-link
+    params: [public_key, amount, currency, payment_reference, charge_url, phone_number, email, display_image, callback_url, funding_sources]
+  funding_sources: [CARD, PAGA, TRANSFER, AGENT, USSD]
+  post_payment:
+    redirect_params: [charge_reference, status_message, status_code]
+    webhook: sent to callback_url when provided
+- family: E-commerce plugins
+  description: Prebuilt Paga Checkout gateways for storefront platforms (catalogued in packages/).
+  loaders:
+  - {name: WooCommerce plugin, url: https://github.com/Paga-Developer-Community/paga-checkout-for-woocommerce}
+  - {name: Magento 2 plugin, url: https://github.com/Paga-Developer-Community/paga-checkout-magento-plugin}
