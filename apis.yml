@@ -1,0 +1,129 @@
+aid: paga
+url: https://raw.githubusercontent.com/api-evangelist/paga/refs/heads/main/apis.yml
+name: Paga
+kind: company
+description: Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money
+  and payments company founded in 2009 and licensed by the Central Bank of Nigeria.
+  Its developer platform exposes REST APIs - the Business API, Collect API, and Direct
+  Debit API - for disbursements, airtime/data and bill payments, bank deposits, and
+  NGN collections via payment requests and persistent (NUBAN) account numbers.
+  Authentication combines a principal/credential key pair with a per-request SHA-512
+  hash header.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Mobile Money
+- Fintech
+- Collections
+- Nigeria
+created: '2026-07-17'
+modified: '2026-07-17'
+specificationVersion: '0.19'
+apis:
+- aid: paga:paga-collect-api
+  name: Paga Collect API
+  tags:
+  - Collections
+  - Payments
+  - Persistent Payment Account
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
+  baseURL: https://collect.paga.com
+  properties:
+  - url: https://developer-docs.paga.com/docs/paga-collect-api
+    type: Documentation
+  - url: https://developer-docs.paga.com/docs/operations-1
+    type: APIReference
+  - url: openapi/paga-openapi.yml
+    type: OpenAPI
+  - url: collections/paga.postman_collection.json
+    type: PostmanCollection
+  description: Collect NGN payments from customers via payment requests (bank
+    transfer, USSD, card, agent, or Paga wallet) and persistent NUBAN account
+    numbers, with status checks, history, and refunds. HTTP Basic auth plus a
+    per-operation SHA-512 hash header.
+- aid: paga:paga-business-api
+  name: Paga Business API
+  tags:
+  - Disbursements
+  - Airtime
+  - Merchant Payment
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer-docs.paga.com/docs/business-rest-api
+  baseURL: https://www.mypaga.com/paga-webservices/business-rest/secured
+  properties:
+  - url: https://developer-docs.paga.com/docs/business-rest-api
+    type: Documentation
+  - url: https://developer-docs.paga.com/docs/business-rest-api-operations
+    type: APIReference
+  - url: openapi/paga-openapi.yml
+    type: OpenAPI
+  - url: collections/paga.postman_collection.json
+    type: PostmanCollection
+  description: Integrate the Paga platform for money transfers, airtime/data
+    purchase, merchant and bill payments, bank deposits, account balance,
+    transaction history, and customer onboarding. principal/credentials header
+    auth plus a per-operation SHA-512 hash header; requires IP whitelisting.
+- aid: paga:paga-direct-debit-api
+  name: Paga Direct Debit API
+  tags:
+  - Direct Debit
+  - Mandate
+  - Tokenization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer-docs.paga.com/docs/direct-debit-api
+  baseURL: https://collect.paga.com
+  properties:
+  - url: https://developer-docs.paga.com/docs/direct-debit-api
+    type: Documentation
+  - url: openapi/paga-openapi.yml
+    type: OpenAPI
+  - url: collections/paga.postman_collection.json
+    type: PostmanCollection
+  description: Tokenize a customer bank account (mandate) and charge it for
+    one-time or recurring debits, with mandate status checks and revocation.
+    Shares the Collect API host and HTTP Basic + SHA-512 hash auth.
+- aid: paga:paga-connect-api
+  name: Paga Connect
+  tags:
+  - OAuth
+  - Checkout
+  - Payments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer-docs.paga.com/docs/paga-connect
+  baseURL: https://www.mypaga.com
+  properties:
+  - url: https://developer-docs.paga.com/docs/paga-connect
+    type: Documentation
+  description: OAuth-based hosted checkout that lets third parties charge a
+    customer's Paga wallet and read account/merchant details after the customer
+    authorizes access. Documented separately from the hash-authenticated REST
+    surfaces.
+common:
+- type: AgenticAccess
+  url: agentic-access/paga-agentic-access.yml
+- type: TrustCenter
+  url: security/paga-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/paga-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/paga-domain-security.yml
+- type: Authentication
+  url: authentication/paga-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/Paga-Developer-Community
+- type: LinkedIn
+  url: https://www.linkedin.com/company/paga-tech
+- type: Website
+  url: https://www.paga.com/
+- type: Documentation
+  url: https://developer-docs.paga.com/
+- type: Plans
+  url: plans/paga-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/paga-rate-limits.yml
+- type: FinOps
+  url: finops/paga-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

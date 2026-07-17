@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Paga Developer API",
+    "description": "Modeled from the public Paga developer documentation (https://developer-docs.paga.com/). Covers the Collect API and Direct Debit API (host {{collectBaseUrl}}) and the Business API (host {{businessBaseUrl}}). Every request needs a SHA-512 `hash` header over an operation-specific ordered concatenation of parameters plus the account hash key. Collect/Direct Debit use HTTP Basic (publicKey:secretKey); the Business API uses `principal` and `credentials` headers. All amounts are in NGN.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "collectBaseUrl", "value": "https://beta-collect.paga.com" },
+    { "key": "businessBaseUrl", "value": "https://beta.mypaga.com" },
+    { "key": "principal", "value": "YOUR_PUBLIC_KEY" },
+    { "key": "credentials", "value": "YOUR_SECRET_KEY" },
+    { "key": "hash", "value": "SHA512_OF_ORDERED_PARAMS_PLUS_HASHKEY" }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{principal}}", "type": "string" },
+      { "key": "password", "value": "{{credentials}}", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Collect API",
+      "item": [
+        {
+          "name": "Request Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + amount + currency + payer.phoneNumber + payer.email + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/paymentRequest", "host": ["{{collectBaseUrl}}"], "path": ["paymentRequest"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445564\",\n  \"amount\": 5000.00,\n  \"currency\": \"NGN\",\n  \"payer\": {\n    \"name\": \"Jane Doe\",\n    \"phoneNumber\": \"07022222222\",\n    \"email\": \"jane@example.com\"\n  },\n  \"payee\": {\n    \"name\": \"Acme Ltd\"\n  },\n  \"callBackUrl\": \"https://merchant.example.com/paga/callback\"\n}" }
+          }
+        },
+        {
+          "name": "Check Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/status", "host": ["{{collectBaseUrl}}"], "path": ["status"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445564\"\n}" }
+          }
+        },
+        {
+          "name": "Refund V2",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/refund/v2", "host": ["{{collectBaseUrl}}"], "path": ["refund", "v2"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445564\",\n  \"refundAmount\": 5000.00,\n  \"currency\": \"NGN\",\n  \"reason\": \"customer request\"\n}" }
+          }
+        },
+        {
+          "name": "Get Banks",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/banks", "host": ["{{collectBaseUrl}}"], "path": ["banks"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445565\"\n}" }
+          }
+        },
+        {
+          "name": "Register Persistent Payment Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/registerPersistentPaymentAccount", "host": ["{{collectBaseUrl}}"], "path": ["registerPersistentPaymentAccount"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445566\",\n  \"accountName\": \"Jane Doe\",\n  \"phoneNumber\": \"07022222222\",\n  \"accountReference\": \"CUST-000123\",\n  \"financialIdentificationNumber\": \"22222222222\",\n  \"callbackUrl\": \"https://merchant.example.com/paga/ppa-callback\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Direct Debit API",
+      "item": [
+        {
+          "name": "Charge Debit Mandate",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + amount + accountReference + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/chargeDebitMandate", "host": ["{{collectBaseUrl}}"], "path": ["chargeDebitMandate"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445567\",\n  \"amount\": 2500.00,\n  \"currency\": \"NGN\",\n  \"accountReference\": \"MANDATE-000123\"\n}" }
+          }
+        },
+        {
+          "name": "Get Charge Mandate Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/getChargeMandateStatus", "host": ["{{collectBaseUrl}}"], "path": ["getChargeMandateStatus"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445567\"\n}" }
+          }
+        },
+        {
+          "name": "Disable Mandate",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + accountReference + hashKey)" }
+            ],
+            "url": { "raw": "{{collectBaseUrl}}/disableMandate", "host": ["{{collectBaseUrl}}"], "path": ["disableMandate"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0022445568\",\n  \"accountReference\": \"MANDATE-000123\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business API",
+      "item": [
+        {
+          "name": "Money Transfer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "principal", "value": "{{principal}}" },
+              { "key": "credentials", "value": "{{credentials}}" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + amount + destinationAccount + destinationBank + hashKey)" }
+            ],
+            "url": { "raw": "{{businessBaseUrl}}/paga-webservices/business-rest/secured/moneyTransfer", "host": ["{{businessBaseUrl}}"], "path": ["paga-webservices", "business-rest", "secured", "moneyTransfer"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0033112201\",\n  \"amount\": 10000.00,\n  \"currency\": \"NGN\",\n  \"destinationAccount\": \"07033333333\",\n  \"sendWithdrawalCode\": false\n}" }
+          }
+        },
+        {
+          "name": "Deposit To Bank",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "principal", "value": "{{principal}}" },
+              { "key": "credentials", "value": "{{credentials}}" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{businessBaseUrl}}/paga-webservices/business-rest/secured/depositToBank", "host": ["{{businessBaseUrl}}"], "path": ["paga-webservices", "business-rest", "secured", "depositToBank"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0033112202\",\n  \"amount\": 15000.00,\n  \"destinationBankUUID\": \"3E94C4BC-6F9A-442F-8F1A-0000000000AA\",\n  \"destinationBankAccountNumber\": \"0123456789\",\n  \"recipientPhoneNumber\": \"07044444444\"\n}" }
+          }
+        },
+        {
+          "name": "Airtime Purchase",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "principal", "value": "{{principal}}" },
+              { "key": "credentials", "value": "{{credentials}}" },
+              { "key": "hash", "value": "{{hash}}" }
+            ],
+            "url": { "raw": "{{businessBaseUrl}}/paga-webservices/business-rest/secured/airtimePurchase", "host": ["{{businessBaseUrl}}"], "path": ["paga-webservices", "business-rest", "secured", "airtimePurchase"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0033112203\",\n  \"amount\": 500.00,\n  \"destinationPhoneNumber\": \"07055555555\",\n  \"isDataBundle\": false\n}" }
+          }
+        },
+        {
+          "name": "Account Balance",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "principal", "value": "{{principal}}" },
+              { "key": "credentials", "value": "{{credentials}}" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{businessBaseUrl}}/paga-webservices/business-rest/secured/accountBalance", "host": ["{{businessBaseUrl}}"], "path": ["paga-webservices", "business-rest", "secured", "accountBalance"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0033112204\"\n}" }
+          }
+        },
+        {
+          "name": "Get Banks",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "principal", "value": "{{principal}}" },
+              { "key": "credentials", "value": "{{credentials}}" },
+              { "key": "hash", "value": "{{hash}}", "description": "SHA-512(referenceNumber + hashKey)" }
+            ],
+            "url": { "raw": "{{businessBaseUrl}}/paga-webservices/business-rest/secured/getBanks", "host": ["{{businessBaseUrl}}"], "path": ["paga-webservices", "business-rest", "secured", "getBanks"] },
+            "body": { "mode": "raw", "options": { "raw": { "language": "json" } }, "raw": "{\n  \"referenceNumber\": \"0033112205\"\n}" }
+          }
+        }
+      ]
+    }
+  ]
+}

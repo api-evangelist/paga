@@ -1,0 +1,316 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/paga-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the modeled OpenAPI. A governance starting point for exposing Paga's payment APIs to AI
+  agents - review and bind audience per deployment. Money-movement operations default to
+  human-in-the-loop because they debit or disburse real NGN funds. See research/curity/agentic-access/.
+summary:
+  operations: 23
+  by_action_class:
+    acting: 15
+    connected: 8
+  by_consequence:
+    write: 15
+    read: 8
+  human_in_the_loop_required: 8
+operations:
+- path: /paymentRequest
+  method: post
+  operationId: requestPayment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - high-value
+    audit: required
+- path: /status
+  method: post
+  operationId: checkStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /refund/v2
+  method: post
+  operationId: refundPaymentV2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - refund
+    audit: required
+- path: /history
+  method: post
+  operationId: retrieveHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /banks
+  method: post
+  operationId: getCollectBanks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /registerPersistentPaymentAccount
+  method: post
+  operationId: registerPersistentPaymentAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - pii
+    audit: required
+- path: /getPersistentPaymentAccount
+  method: post
+  operationId: getPersistentPaymentAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /updatePersistentPaymentAccount
+  method: post
+  operationId: updatePersistentPaymentAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+    audit: required
+- path: /deletePersistentPaymentAccount
+  method: post
+  operationId: deletePersistentPaymentAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - destructive
+      - irreversible
+    audit: required
+- path: /chargeDebitMandate
+  method: post
+  operationId: chargeDebitMandate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - high-value
+    audit: required
+- path: /getChargeMandateStatus
+  method: post
+  operationId: getChargeMandateStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /disableMandate
+  method: post
+  operationId: disableMandate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - destructive
+    audit: required
+- path: /paga-webservices/business-rest/secured/moneyTransfer
+  method: post
+  operationId: moneyTransfer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - high-value
+    audit: required
+- path: /paga-webservices/business-rest/secured/airtimePurchase
+  method: post
+  operationId: airtimePurchase
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - money-movement
+    audit: required
+- path: /paga-webservices/business-rest/secured/merchantPayment
+  method: post
+  operationId: merchantPayment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - high-value
+    audit: required
+- path: /paga-webservices/business-rest/secured/depositToBank
+  method: post
+  operationId: depositToBank
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: required
+      triggers:
+      - money-movement
+      - high-value
+    audit: required
+- path: /paga-webservices/business-rest/secured/validateDepositToBank
+  method: post
+  operationId: validateDepositToBank
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/accountBalance
+  method: post
+  operationId: accountBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/getBanks
+  method: post
+  operationId: getBusinessBanks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/getMobileOperators
+  method: post
+  operationId: getMobileOperators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/getOperationStatus
+  method: post
+  operationId: getOperationStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/transactionHistory
+  method: post
+  operationId: transactionHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /paga-webservices/business-rest/secured/registerCustomer
+  method: post
+  operationId: registerCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - pii
+      - kyc
+    audit: required

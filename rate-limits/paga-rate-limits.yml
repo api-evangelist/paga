@@ -1,0 +1,52 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Paga
+providerId: paga
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Mobile Money
+- Fintech
+- Nigeria
+- Rate Limiting
+- Quotas
+description: >-
+  Paga does not publish explicit numeric rate limits for its Business, Collect,
+  or Direct Debit APIs. Access is gated primarily by IP whitelisting (Business
+  API) and by idempotency: each operation requires a unique client-generated
+  referenceNumber, and replaying a reference returns the prior result rather
+  than creating a duplicate. Abnormal traffic is subject to fraud controls and
+  account-level throttling at Paga's discretion.
+notes: >-
+  No public per-endpoint RPM/TPS values are documented. Treat unique
+  referenceNumber generation and exponential backoff on 5xx as the effective
+  client contract; confirm any hard limits with Paga during onboarding.
+sources:
+- https://developer-docs.paga.com/docs/business-rest-api-operations
+- https://developer-docs.paga.com/docs/operations-1
+responseCodes:
+  throttled: 429
+limits:
+- name: Documented numeric limit
+  scope: account
+  metric: requests
+  limit: not published
+  notes: Paga does not publish explicit rate-limit numbers for the developer APIs.
+- name: IP whitelisting (Business API)
+  scope: account
+  metric: source_ip
+  limit: whitelisted IPs only
+  notes: Business API rejects calls from non-whitelisted IP addresses.
+policies:
+- name: Idempotency
+  description: Each operation requires a unique referenceNumber; replays return the original result and do not duplicate transactions.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 5xx/timeouts and reconcile via the status endpoints.
+- name: Fraud Controls
+  description: Account-level throttling and review may be applied to anomalous or high-value activity.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

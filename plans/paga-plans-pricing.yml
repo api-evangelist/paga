@@ -1,0 +1,116 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Paga
+providerId: paga
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Mobile Money
+- Fintech
+- Collections
+- Nigeria
+- Plans
+description: >-
+  Paga's developer APIs are available to registered Paga Business accounts at no
+  subscription cost; the commercial model is transaction-fee based. Fees vary by
+  channel (bank transfer, USSD, card, wallet), by product (collections,
+  disbursements, airtime, bill payment), and are set per merchant agreement. Paga
+  does not publish a single fixed public API price card; peer-to-peer transfers,
+  wallet funding, and airtime purchases are widely free or a small flat Naira fee,
+  while collection and disbursement transactions attract negotiated per-transaction
+  or percentage fees. Confirm current rates with Paga business onboarding.
+notes: >-
+  Per-transaction rates are not published as a fixed public table for the API
+  products; they are agreed during merchant onboarding. Currency is NGN.
+sources:
+- https://developer-docs.paga.com/
+- https://www.paga.com/
+plans:
+- id: paga-business-account
+  name: Paga Business Account (API access)
+  type: usage
+  description: >-
+    Free-to-open Paga Business account granting live and test API keys for the
+    Business, Collect, and Direct Debit APIs. No subscription fee; revenue is
+    per-transaction.
+  entries:
+  - label: API access
+    name: api_access
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: Nigeria
+    unit: 1
+    price: free (no subscription)
+    userMultiplied: false
+  - label: Collections (payment request / persistent account)
+    name: collections
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: Nigeria
+    unit: 1
+    price: negotiated per-transaction / percentage fee (NGN)
+    userMultiplied: false
+  - label: Disbursement (money transfer / deposit to bank)
+    name: disbursement
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: Nigeria
+    unit: 1
+    price: negotiated per-transaction fee (NGN)
+    userMultiplied: false
+  - label: Airtime & data
+    name: airtime
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: Nigeria
+    unit: 1
+    price: commission / free-to-nominal (NGN)
+    userMultiplied: false
+  - label: Direct debit charge
+    name: direct_debit
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: Nigeria
+    unit: 1
+    price: negotiated per-charge fee (NGN)
+    userMultiplied: false
+  elements:
+  - name: Collect API
+  - name: Business API
+  - name: Direct Debit API
+- id: paga-enterprise
+  name: Enterprise / Custom
+  type: enterprise
+  description: >-
+    Volume merchants negotiate custom pricing, settlement terms, and support
+    through Paga business onboarding.
+  entries:
+  - label: Custom Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: Nigeria
+    unit: 1
+    price: contact Paga business
+    userMultiplied: false
+  elements:
+  - name: Negotiated Transaction Fees
+  - name: Settlement Terms
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

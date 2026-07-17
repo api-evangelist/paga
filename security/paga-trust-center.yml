@@ -1,0 +1,31 @@
+generated: '2026-07-17'
+method: modeled-from-docs
+source: https://www.paga.com/ and https://developer-docs.paga.com/
+url: https://www.paga.com/
+certifications:
+- PCI DSS
+- CBN licensed (Mobile Money Operator)
+- NDPR (Nigeria Data Protection Regulation)
+evidence:
+- source: https://www.paga.com/
+  keywords:
+  - central bank of nigeria
+  - licensed
+  - pci dss
+  - data protection
+- source: https://developer-docs.paga.com/docs/introduction
+  keywords:
+  - api keys
+  - ip whitelisting
+  - hash
+regulation:
+  regulator: Central Bank of Nigeria (CBN)
+  operatingEntity: Pagatech Financial Services Limited
+  licenseType: Mobile Money Operator / Payment Service
+  jurisdiction: Nigeria
+notes: >-
+  Paga (Pagatech Financial Services Limited) is a CBN-licensed mobile-money and
+  payments operator in Nigeria; card acceptance is subject to PCI DSS and
+  customer data to Nigeria's NDPR. Paga does not publish a dedicated public
+  trust-center portal; certifications are asserted from corporate and developer
+  pages and should be reconfirmed with Paga for compliance-critical use.

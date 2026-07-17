@@ -1,0 +1,77 @@
+aid: paga
+name: Paga
+review:
+  question: Does Paga expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Paga's asynchronous notification model is
+    HTTP webhooks (callbacks), not a streaming or WebSocket transport. Paga
+    POSTs JSON callbacks to a merchant-configured callbackUrl when a payment
+    request is fulfilled or when a persistent payment account receives a
+    deposit. HTTP webhooks are outbound request/response calls and are out of
+    scope for AsyncAPI WebSocket/SSE modeling; no ws://, wss://, or SSE stream
+    is documented.
+findings:
+  summary: |
+    Paga does not publish a documented public WebSocket API. The Business API
+    (https://www.mypaga.com/paga-webservices/business-rest/secured/*), the
+    Collect API and Direct Debit API (https://collect.paga.com/*) are all
+    synchronous HTTPS REST endpoints. Event delivery is via HTTP webhook
+    callbacks to a merchant callback URL. No realtime bidirectional socket is
+    documented anywhere in the Paga developer documentation.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://collect.paga.com
+      documented: true
+      note: Collect API and Direct Debit API. Test host https://beta-collect.paga.com.
+    - protocol: REST
+      scheme: https
+      baseURL: https://www.mypaga.com/paga-webservices/business-rest/secured
+      documented: true
+      note: Business API. Test host https://beta.mypaga.com.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: >-
+        Outbound HTTP POST callbacks to a merchant callbackUrl on payment
+        request fulfilment and persistent-account deposits. Not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in any Paga developer doc as of the review date.
+  endpointsConfirmedRest:
+    - POST https://collect.paga.com/paymentRequest
+    - POST https://collect.paga.com/status
+    - POST https://collect.paga.com/refund/v2
+    - POST https://collect.paga.com/banks
+    - POST https://collect.paga.com/registerPersistentPaymentAccount
+    - POST https://collect.paga.com/chargeDebitMandate
+    - POST https://collect.paga.com/disableMandate
+    - POST https://www.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer
+    - POST https://www.mypaga.com/paga-webservices/business-rest/secured/depositToBank
+    - POST https://www.mypaga.com/paga-webservices/business-rest/secured/accountBalance
+sources:
+  - url: https://developer-docs.paga.com/
+    type: Documentation
+    note: Developer portal; lists Business, Collect, Direct Debit, Paga Connect - all REST/HTTP.
+  - url: https://developer-docs.paga.com/docs/operations-1
+    type: APIReference
+    note: Collect API operations, all POST over HTTPS; callbacks are HTTP webhooks.
+  - url: https://developer-docs.paga.com/docs/business-rest-api-operations
+    type: APIReference
+    note: Business API operations, all POST over HTTPS.
+  - url: https://developer-docs.paga.com/docs/direct-debit-api
+    type: Documentation
+    note: Direct Debit operations over the collect.paga.com REST host; no socket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: false
+  reason: |
+    No WebSocket or SSE protocol surface exists. Asynchronous events are HTTP
+    webhook callbacks, which are out of scope for AsyncAPI modeling under
+    current API Evangelist scope. No AsyncAPI artifact was authored and no
+    AsyncAPI pointer was added to apis.yml.

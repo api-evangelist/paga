@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Paga
+providerId: paga
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Payments
+- Mobile Money
+- Fintech
+- Nigeria
+- FinOps
+- Cost Management
+description: >-
+  FinOps view of Paga API spend. Paga bills per-transaction fees rather than
+  subscriptions: collections, disbursements, bank deposits, airtime/data, bill
+  payments, and direct-debit charges each carry a negotiated flat-Naira or
+  percentage fee. Cost is driven by transaction volume, channel mix (bank
+  transfer / USSD / card / wallet), and merchant agreement. All charges settle
+  in NGN.
+notes: >-
+  Per-transaction rates are negotiated at onboarding and not published as a
+  fixed table; reconcile actual fees from settlement statements. Currency NGN.
+sources:
+- https://developer-docs.paga.com/
+- https://www.paga.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Paga
+serviceCategory: Payments and Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per-Transaction
+  billingCurrency: NGN
+  chargeCategories:
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Paga Developer APIs
+  ServiceCategory: Payments and Financial Services
+  ProviderName: Paga
+  PublisherName: Pagatech Financial Services Limited
+  InvoiceIssuerName: Paga
+  BillingCurrency: NGN
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: collection_transactions
+  description: Payment requests and persistent-account deposits collected, billed per transaction.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - channel
+  - api
+- name: disbursement_transactions
+  description: Money transfers and deposit-to-bank operations, billed per transaction.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - destinationBank
+- name: airtime_data_transactions
+  description: Airtime and data purchases, commissioned or nominally priced.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - mobileOperator
+- name: bill_merchant_payments
+  description: Merchant and bill payments, billed per transaction.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - merchant
+- name: direct_debit_charges
+  description: Tokenized-mandate debits, billed per charge.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - accountReference
+principles:
+- name: Visibility
+  description: Reconcile fees from Paga settlement statements and the transactionHistory / history endpoints.
+- name: Allocation
+  description: Tag each transaction with a workload-specific referenceNumber to map spend to teams and use cases.
+- name: Optimization
+  description: Steer collections toward lower-fee channels (bank transfer / USSD) where possible and batch disbursements.
+- name: Accountability
+  description: Review per-channel transaction fees monthly against negotiated rates.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

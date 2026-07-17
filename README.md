@@ -1,0 +1,130 @@
+# Paga (paga)
+
+Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company founded in 2009 and licensed by the Central Bank of Nigeria. Its developer platform exposes REST APIs — the Business API, Collect API, and Direct Debit API — for disbursements, airtime/data and bill payments, bank deposits, and NGN collections via payment requests and persistent (NUBAN) account numbers. Authentication combines a principal/credential key pair with a per-request SHA-512 hash header.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/paga/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/paga/refs/heads/main/apis.yml)
+
+## Tags
+
+- Payments
+- Mobile Money
+- Fintech
+- Collections
+- Nigeria
+
+## Timestamps
+
+- **Created:** 2026-07-17
+- **Modified:** 2026-07-17
+
+## APIs
+
+### Paga Collect API
+
+Collect NGN payments from customers via payment requests (bank transfer, USSD, card, agent, or Paga wallet) and persistent NUBAN account numbers, with status checks, history, and refunds. HTTP Basic auth plus a per-operation SHA-512 hash header.
+
+- **Human URL:** [https://developer-docs.paga.com/docs/paga-collect-api](https://developer-docs.paga.com/docs/paga-collect-api)
+- **Base URL:** `https://collect.paga.com`
+
+#### Tags
+
+- Collections
+- Payments
+- Persistent Payment Account
+
+#### Properties
+
+- [Documentation](https://developer-docs.paga.com/docs/paga-collect-api)
+- [API Reference](https://developer-docs.paga.com/docs/operations-1)
+- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+
+### Paga Business API
+
+Integrate the Paga platform for money transfers, airtime/data purchase, merchant and bill payments, bank deposits, account balance, transaction history, and customer onboarding. `principal`/`credentials` header auth plus a per-operation SHA-512 hash header; requires IP whitelisting.
+
+- **Human URL:** [https://developer-docs.paga.com/docs/business-rest-api](https://developer-docs.paga.com/docs/business-rest-api)
+- **Base URL:** `https://www.mypaga.com/paga-webservices/business-rest/secured`
+
+#### Tags
+
+- Disbursements
+- Airtime
+- Merchant Payment
+
+#### Properties
+
+- [Documentation](https://developer-docs.paga.com/docs/business-rest-api)
+- [API Reference](https://developer-docs.paga.com/docs/business-rest-api-operations)
+- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+
+### Paga Direct Debit API
+
+Tokenize a customer bank account (mandate) and charge it for one-time or recurring debits, with mandate status checks and revocation. Shares the Collect API host and HTTP Basic + SHA-512 hash auth.
+
+- **Human URL:** [https://developer-docs.paga.com/docs/direct-debit-api](https://developer-docs.paga.com/docs/direct-debit-api)
+- **Base URL:** `https://collect.paga.com`
+
+#### Tags
+
+- Direct Debit
+- Mandate
+- Tokenization
+
+#### Properties
+
+- [Documentation](https://developer-docs.paga.com/docs/direct-debit-api)
+- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+
+### Paga Connect
+
+OAuth-based hosted checkout that lets third parties charge a customer's Paga wallet and read account/merchant details after the customer authorizes access. Documented separately from the hash-authenticated REST surfaces.
+
+- **Human URL:** [https://developer-docs.paga.com/docs/paga-connect](https://developer-docs.paga.com/docs/paga-connect)
+- **Base URL:** `https://www.mypaga.com`
+
+#### Tags
+
+- OAuth
+- Checkout
+- Payments
+
+#### Properties
+
+- [Documentation](https://developer-docs.paga.com/docs/paga-connect)
+
+## Common Properties
+
+- [Agentic Access](agentic-access/paga-agentic-access.yml)
+- [Trust Center](security/paga-trust-center.yml)
+- [Vulnerability Disclosure](security/paga-vulnerability-disclosure.yml)
+- [Domain Security](security/paga-domain-security.yml)
+- [Authentication](authentication/paga-authentication.yml)
+- [GitHub Organization](https://github.com/Paga-Developer-Community)
+- [LinkedIn](https://www.linkedin.com/company/paga-tech)
+- [Website](https://www.paga.com/)
+- [Documentation](https://developer-docs.paga.com/)
+- [Plans](plans/paga-plans-pricing.yml)
+- [Rate Limits](rate-limits/paga-rate-limits.yml)
+- [Fin Ops](finops/paga-finops.yml)
+
+## Authentication
+
+Paga issues three secrets from the Business Account dashboard (Developer Tools → API keys), with separate test and live sets:
+
+- **principal** — public key / merchant public ID
+- **credentials** — secret key / password
+- **hash key** — HMAC key used to build the per-request `hash` header
+
+Every operation carries a `hash` header: `SHA-512(<ordered operation parameters> + hashKey)`, concatenated with no separators. The Collect and Direct Debit APIs wrap the principal/credential pair in HTTP Basic (`base64(publicKey:secretKey)`); the Business API sends them as `principal` and `credentials` headers and additionally requires the caller's IP to be whitelisted. All amounts are in Nigerian Naira (NGN).
+
+## WebSocket Review
+
+Paga does **not** expose a documented public WebSocket API. All product surfaces are synchronous HTTPS REST; asynchronous events are delivered as outbound HTTP webhook callbacks to a merchant `callbackUrl`. See [review.yml](review.yml).
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: probed
+source: live TLS/HTTP probes of apis.yml + OpenAPI hosts (2026-07-17)
+hosts:
+- host: www.paga.com
+  https: true
+  http_status: 302
+  tls_verified: true
+  cert_expires: Dec 12 13:07:15 2026 GMT
+- host: developer-docs.paga.com
+  https: true
+  http_status: 302
+  tls_verified: true
+  cert_expires: Oct  2 11:33:03 2026 GMT
+- host: collect.paga.com
+  https: true
+  http_status: 403
+  tls_verified: true
+  cert_expires: Dec 12 13:07:15 2026 GMT
+  notes: Collect API host; 403 to unauthenticated browser GET is expected (API POST endpoints only).
+- host: www.mypaga.com
+  https: true
+  http_status: 200
+  tls_verified: true
+  cert_expires: Sep 29 12:13:50 2026 GMT
+  notes: Business API host (path /paga-webservices/business-rest/secured).
+transport:
+- All documented endpoints are HTTPS only.
+- Business API additionally requires caller IP whitelisting before access is granted.
+- Per-request payload integrity is enforced by a SHA-512 hash header over ordered request parameters plus the account hash key.
+notes: >-
+  All four in-scope hosts terminate valid TLS certificates. Region hosts are
+  Nigeria-oriented (mypaga.com for the Business API, collect.paga.com for
+  Collect and Direct Debit). No formal Paga security.txt was confirmed at probe
+  time; report vulnerabilities to Paga support.
