@@ -1,0 +1,400 @@
+openapi: 3.0.3
+info:
+  title: Paga Developer Business Collect API
+  description: 'Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.'
+  version: '1.0'
+  contact:
+    name: Paga Developer Support
+    url: https://developer-docs.paga.com/
+    email: businesssupport@paga.com
+  termsOfService: https://www.paga.com/
+servers:
+- url: https://www.mypaga.com
+  description: Business API - Live
+- url: https://beta.mypaga.com
+  description: Business API - Test / Sandbox
+- url: https://collect.paga.com
+  description: Collect API and Direct Debit API - Live
+- url: https://beta-collect.paga.com
+  description: Collect API and Direct Debit API - Test / Sandbox
+security:
+- pagaHash: []
+tags:
+- name: Collect
+  description: NGN collections - payment requests and persistent payment accounts.
+paths:
+  /paymentRequest:
+    servers:
+    - url: https://collect.paga.com
+      description: Collect / Direct Debit - Live
+    - url: https://beta-collect.paga.com
+      description: Collect / Direct Debit - Test
+    post:
+      tags:
+      - Collect
+      operationId: requestPayment
+      summary: Register a payment request
+      description: Registers a new request for payment between a payer and payee. The payer is notified and can pay via bank transfer, USSD, card, agent, or Paga wallet; a callback is sent on fulfilment. The same path is used by the Direct Debit API to initiate bank-account mandate tokenization. hash = SHA-512(referenceNumber + amount + currency + payer.phoneNumber + payer.email + hashKey).
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequestRequest'
+      responses:
+        '200':
+          description: Payment request registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /status:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: checkStatus
+      summary: Check payment request / mandate status
+      description: Returns the status of a submitted operation (payment request, persistent account creation, or direct-debit tokenization) by reference number, including any refund information. hash = SHA-512(referenceNumber + hashKey).
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+      responses:
+        '200':
+          description: Status returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /refund/v2:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: refundPaymentV2
+      summary: Refund or cancel a payment request (v2)
+      description: Cancels or refunds a previously fulfilled or pending payment request.
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+                refundAmount:
+                  type: number
+                  format: double
+                currency:
+                  type: string
+                  example: NGN
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Refund processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /history:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: retrieveHistory
+      summary: Retrieve collection history
+      description: Queries collection activity within a date range (maximum three months).
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+                startDateTimeUTC:
+                  type: string
+                  format: date-time
+                endDateTimeUTC:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: History returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /registerPersistentPaymentAccount:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: registerPersistentPaymentAccount
+      summary: Create a persistent payment account
+      description: Creates a reusable NUBAN account number assigned to a customer so the organization can collect payments any time via bank or Paga transfer.
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersistentPaymentAccountRequest'
+      responses:
+        '200':
+          description: Persistent payment account created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /getPersistentPaymentAccount:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: getPersistentPaymentAccount
+      summary: Retrieve a persistent payment account
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - accountReference
+              properties:
+                referenceNumber:
+                  type: string
+                accountReference:
+                  type: string
+      responses:
+        '200':
+          description: Account details returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /updatePersistentPaymentAccount:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: updatePersistentPaymentAccount
+      summary: Update a persistent payment account
+      description: Modifies account properties except the NUBAN and account reference.
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersistentPaymentAccountRequest'
+      responses:
+        '200':
+          description: Account updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /deletePersistentPaymentAccount:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Collect
+      operationId: deletePersistentPaymentAccount
+      summary: Delete a persistent payment account
+      description: Removes a persistent payment identifier. Irreversible.
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - accountReference
+              properties:
+                referenceNumber:
+                  type: string
+                accountReference:
+                  type: string
+      responses:
+        '200':
+          description: Account deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+components:
+  schemas:
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+          example: '07022222222'
+        bankId:
+          type: string
+          description: Paga bank UUID (from /banks).
+        accountNumber:
+          type: string
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
+    PersistentPaymentAccountRequest:
+      type: object
+      required:
+      - referenceNumber
+      - accountName
+      - phoneNumber
+      properties:
+        referenceNumber:
+          type: string
+        accountName:
+          type: string
+        phoneNumber:
+          type: string
+        accountReference:
+          type: string
+          description: Unique client identifier for the persistent account.
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
+        creditBankId:
+          type: string
+        creditBankAccountNumber:
+          type: string
+        callbackUrl:
+          type: string
+          format: uri
+    PaymentRequestRequest:
+      type: object
+      required:
+      - referenceNumber
+      - amount
+      - currency
+      - payer
+      properties:
+        referenceNumber:
+          type: string
+          description: Unique client-generated reference for the transaction.
+          example: '0022445564'
+        amount:
+          type: number
+          format: double
+          example: 5000.0
+        currency:
+          type: string
+          example: NGN
+        payer:
+          $ref: '#/components/schemas/Party'
+        payee:
+          $ref: '#/components/schemas/Party'
+        expiryDateTimeUTC:
+          type: string
+          format: date-time
+        isSuppressMessages:
+          type: boolean
+        payerCollectionFeeShare:
+          type: number
+          format: double
+        payeeCollectionFeeShare:
+          type: number
+          format: double
+        callBackUrl:
+          type: string
+          format: uri
+        paymentMethods:
+          type: array
+          items:
+            type: string
+            enum:
+            - BANK_TRANSFER
+            - FUNDING_USSD
+            - PAGA
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Collect API and Direct Debit API use HTTP Basic authentication with base64(publicKey:secretKey), where publicKey is the account principal and secretKey is the account credential.
+    pagaPrincipal:
+      type: apiKey
+      in: header
+      name: principal
+      description: Business API public key (principal / merchant public ID).
+    pagaCredentials:
+      type: apiKey
+      in: header
+      name: credentials
+      description: Business API secret key (credential / password).
+    pagaHash:
+      type: apiKey
+      in: header
+      name: hash
+      description: SHA-512 hash of an operation-specific ordered concatenation of request parameters plus the account hash key. Required on every operation.

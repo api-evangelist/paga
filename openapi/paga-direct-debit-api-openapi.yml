@@ -1,0 +1,164 @@
+openapi: 3.0.3
+info:
+  title: Paga Developer Business Direct Debit API
+  description: 'Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.'
+  version: '1.0'
+  contact:
+    name: Paga Developer Support
+    url: https://developer-docs.paga.com/
+    email: businesssupport@paga.com
+  termsOfService: https://www.paga.com/
+servers:
+- url: https://www.mypaga.com
+  description: Business API - Live
+- url: https://beta.mypaga.com
+  description: Business API - Test / Sandbox
+- url: https://collect.paga.com
+  description: Collect API and Direct Debit API - Live
+- url: https://beta-collect.paga.com
+  description: Collect API and Direct Debit API - Test / Sandbox
+security:
+- pagaHash: []
+tags:
+- name: Direct Debit
+  description: Bank-account mandate tokenization and recurring debits.
+paths:
+  /chargeDebitMandate:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Direct Debit
+      operationId: chargeDebitMandate
+      summary: Charge a tokenized bank account (mandate)
+      description: Debits an approved, tokenized customer bank account for one-time or recurring payment. hash = SHA-512(referenceNumber + amount + accountReference + hashKey).
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - accountReference
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                currency:
+                  type: string
+                  example: NGN
+                accountReference:
+                  type: string
+      responses:
+        '200':
+          description: Charge submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /getChargeMandateStatus:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Direct Debit
+      operationId: getChargeMandateStatus
+      summary: Check a direct-debit charge status
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+      responses:
+        '200':
+          description: Charge status returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /disableMandate:
+    servers:
+    - url: https://collect.paga.com
+    - url: https://beta-collect.paga.com
+    post:
+      tags:
+      - Direct Debit
+      operationId: disableMandate
+      summary: Disable a direct-debit mandate
+      description: Revokes a previously approved mandate token.
+      security:
+      - basicAuth: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - accountReference
+              properties:
+                referenceNumber:
+                  type: string
+                accountReference:
+                  type: string
+      responses:
+        '200':
+          description: Mandate disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+components:
+  schemas:
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Collect API and Direct Debit API use HTTP Basic authentication with base64(publicKey:secretKey), where publicKey is the account principal and secretKey is the account credential.
+    pagaPrincipal:
+      type: apiKey
+      in: header
+      name: principal
+      description: Business API public key (principal / merchant public ID).
+    pagaCredentials:
+      type: apiKey
+      in: header
+      name: credentials
+      description: Business API secret key (credential / password).
+    pagaHash:
+      type: apiKey
+      in: header
+      name: hash
+      description: SHA-512 hash of an operation-specific ordered concatenation of request parameters plus the account hash key. Required on every operation.

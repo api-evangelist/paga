@@ -1,0 +1,393 @@
+openapi: 3.0.3
+info:
+  title: Paga Developer Business API
+  description: 'Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.'
+  version: '1.0'
+  contact:
+    name: Paga Developer Support
+    url: https://developer-docs.paga.com/
+    email: businesssupport@paga.com
+  termsOfService: https://www.paga.com/
+servers:
+- url: https://www.mypaga.com
+  description: Business API - Live
+- url: https://beta.mypaga.com
+  description: Business API - Test / Sandbox
+- url: https://collect.paga.com
+  description: Collect API and Direct Debit API - Live
+- url: https://beta-collect.paga.com
+  description: Collect API and Direct Debit API - Test / Sandbox
+security:
+- pagaHash: []
+tags:
+- name: Business
+  description: Disbursements, airtime/data, merchant payments, deposits, onboarding.
+paths:
+  /paga-webservices/business-rest/secured/moneyTransfer:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: moneyTransfer
+      summary: Money transfer / disbursement
+      description: Transfers money from the business Paga account to a recipient phone number or bank account. hash = SHA-512(referenceNumber + amount + destinationAccount + destinationBank + hashKey).
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - destinationAccount
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                destinationAccount:
+                  type: string
+                currency:
+                  type: string
+                  example: NGN
+                destinationBank:
+                  type: string
+                senderPrincipal:
+                  type: string
+                sendWithdrawalCode:
+                  type: boolean
+      responses:
+        '200':
+          description: Transfer processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/airtimePurchase:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: airtimePurchase
+      summary: Airtime & data purchase
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - destinationPhoneNumber
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                destinationPhoneNumber:
+                  type: string
+                mobileOperatorPublicId:
+                  type: string
+                isDataBundle:
+                  type: boolean
+      responses:
+        '200':
+          description: Purchase processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/merchantPayment:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: merchantPayment
+      summary: Merchant / bill payment
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - merchantAccount
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                merchantAccount:
+                  type: string
+                merchantReferenceNumber:
+                  type: string
+                merchantService:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Merchant payment processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/depositToBank:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: depositToBank
+      summary: Deposit to bank account
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - destinationBankUUID
+              - destinationBankAccountNumber
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                destinationBankUUID:
+                  type: string
+                destinationBankAccountNumber:
+                  type: string
+                recipientPhoneNumber:
+                  type: string
+                recipientEmail:
+                  type: string
+      responses:
+        '200':
+          description: Deposit processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/validateDepositToBank:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: validateDepositToBank
+      summary: Validate a bank deposit (name enquiry)
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - amount
+              - destinationBankUUID
+              - destinationBankAccountNumber
+              properties:
+                referenceNumber:
+                  type: string
+                amount:
+                  type: number
+                  format: double
+                destinationBankUUID:
+                  type: string
+                destinationBankAccountNumber:
+                  type: string
+      responses:
+        '200':
+          description: Account name resolved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/accountBalance:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: accountBalance
+      summary: Account balance
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+                sourceOfFunds:
+                  type: string
+      responses:
+        '200':
+          description: Balance returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/transactionHistory:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: transactionHistory
+      summary: Transaction history
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              properties:
+                referenceNumber:
+                  type: string
+                startDateUTC:
+                  type: string
+                  format: date-time
+                endDateUTC:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: History returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /paga-webservices/business-rest/secured/registerCustomer:
+    servers:
+    - url: https://www.mypaga.com
+    - url: https://beta.mypaga.com
+    post:
+      tags:
+      - Business
+      operationId: registerCustomer
+      summary: Register a customer
+      description: Creates a Paga customer wallet on behalf of the organization.
+      security:
+      - pagaPrincipal: []
+        pagaCredentials: []
+        pagaHash: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - referenceNumber
+              - customerPhoneNumber
+              properties:
+                referenceNumber:
+                  type: string
+                customerPhoneNumber:
+                  type: string
+                customerFirstName:
+                  type: string
+                customerLastName:
+                  type: string
+                customerEmail:
+                  type: string
+                customerDateOfBirth:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Customer registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+components:
+  schemas:
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Collect API and Direct Debit API use HTTP Basic authentication with base64(publicKey:secretKey), where publicKey is the account principal and secretKey is the account credential.
+    pagaPrincipal:
+      type: apiKey
+      in: header
+      name: principal
+      description: Business API public key (principal / merchant public ID).
+    pagaCredentials:
+      type: apiKey
+      in: header
+      name: credentials
+      description: Business API secret key (credential / password).
+    pagaHash:
+      type: apiKey
+      in: header
+      name: hash
+      description: SHA-512 hash of an operation-specific ordered concatenation of request parameters plus the account hash key. Required on every operation.
