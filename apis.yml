@@ -9,7 +9,20 @@ description: Paga (Pagatech Financial Services Limited) is a Nigerian mobile-mon
   NGN collections via payment requests and persistent (NUBAN) account numbers.
   Authentication combines a principal/credential key pair with a per-request SHA-512
   hash header.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paga.png
 tags:
 - Payments
 - Mobile Money
@@ -20,69 +33,6 @@ created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.19'
 apis:
-- aid: paga:paga-collect-api
-  name: Paga Collect API
-  tags:
-  - Collections
-  - Payments
-  - Persistent Payment Account
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
-  baseURL: https://collect.paga.com
-  properties:
-  - url: https://developer-docs.paga.com/docs/paga-collect-api
-    type: Documentation
-  - url: https://developer-docs.paga.com/docs/operations-1
-    type: APIReference
-  - url: openapi/paga-openapi.yml
-    type: OpenAPI
-  - url: collections/paga.postman_collection.json
-    type: PostmanCollection
-  description: Collect NGN payments from customers via payment requests (bank
-    transfer, USSD, card, agent, or Paga wallet) and persistent NUBAN account
-    numbers, with status checks, history, and refunds. HTTP Basic auth plus a
-    per-operation SHA-512 hash header.
-- aid: paga:paga-business-api
-  name: Paga Business API
-  tags:
-  - Disbursements
-  - Airtime
-  - Merchant Payment
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer-docs.paga.com/docs/business-rest-api
-  baseURL: https://www.mypaga.com/paga-webservices/business-rest/secured
-  properties:
-  - url: https://developer-docs.paga.com/docs/business-rest-api
-    type: Documentation
-  - url: https://developer-docs.paga.com/docs/business-rest-api-operations
-    type: APIReference
-  - url: openapi/paga-openapi.yml
-    type: OpenAPI
-  - url: collections/paga.postman_collection.json
-    type: PostmanCollection
-  description: Integrate the Paga platform for money transfers, airtime/data
-    purchase, merchant and bill payments, bank deposits, account balance,
-    transaction history, and customer onboarding. principal/credentials header
-    auth plus a per-operation SHA-512 hash header; requires IP whitelisting.
-- aid: paga:paga-direct-debit-api
-  name: Paga Direct Debit API
-  tags:
-  - Direct Debit
-  - Mandate
-  - Tokenization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer-docs.paga.com/docs/direct-debit-api
-  baseURL: https://collect.paga.com
-  properties:
-  - url: https://developer-docs.paga.com/docs/direct-debit-api
-    type: Documentation
-  - url: openapi/paga-openapi.yml
-    type: OpenAPI
-  - url: collections/paga.postman_collection.json
-    type: PostmanCollection
-  description: Tokenize a customer bank account (mandate) and charge it for
-    one-time or recurring debits, with mandate status checks and revocation.
-    Shares the Collect API host and HTTP Basic + SHA-512 hash auth.
 - aid: paga:paga-connect-api
   name: Paga Connect
   tags:
@@ -95,11 +45,101 @@ apis:
   properties:
   - url: https://developer-docs.paga.com/docs/paga-connect
     type: Documentation
-  description: OAuth-based hosted checkout that lets third parties charge a
-    customer's Paga wallet and read account/merchant details after the customer
-    authorizes access. Documented separately from the hash-authenticated REST
+  description: >-
+    OAuth-based hosted checkout that lets third parties charge a customer's Paga wallet and read account/merchant
+    details after the customer authorizes access. Documented separately from the hash-authenticated REST
     surfaces.
+- aid: paga:paga-business-api
+  name: Paga Business API
+  description: Disbursements, airtime/data, merchant payments, deposits, onboarding.
+  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
+  baseURL: https://collect.paga.com
+  tags:
+  - Business
+  properties:
+  - type: OpenAPI
+    url: openapi/paga-business-api-openapi.yml
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/paga-collect-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/operations-1
+  - type: PostmanCollection
+    url: collections/paga.postman_collection.json
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/business-rest-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/business-rest-api-operations
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/direct-debit-api
+- aid: paga:paga-collect-api
+  name: Paga Collect API
+  description: NGN collections - payment requests and persistent payment accounts.
+  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
+  baseURL: https://collect.paga.com
+  tags:
+  - Collect
+  properties:
+  - type: OpenAPI
+    url: openapi/paga-collect-api-openapi.yml
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/paga-collect-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/operations-1
+  - type: PostmanCollection
+    url: collections/paga.postman_collection.json
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/business-rest-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/business-rest-api-operations
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/direct-debit-api
+- aid: paga:paga-direct-debit-api
+  name: Paga Direct Debit API
+  description: Bank-account mandate tokenization and recurring debits.
+  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
+  baseURL: https://collect.paga.com
+  tags:
+  - Direct Debit
+  properties:
+  - type: OpenAPI
+    url: openapi/paga-direct-debit-api-openapi.yml
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/paga-collect-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/operations-1
+  - type: PostmanCollection
+    url: collections/paga.postman_collection.json
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/business-rest-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/business-rest-api-operations
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/direct-debit-api
+- aid: paga:paga-reference-api
+  name: Paga Reference API
+  description: Look-up operations - banks, mobile operators, status.
+  humanURL: https://developer-docs.paga.com/docs/paga-collect-api
+  baseURL: https://collect.paga.com
+  tags:
+  - Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/paga-reference-api-openapi.yml
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/paga-collect-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/operations-1
+  - type: PostmanCollection
+    url: collections/paga.postman_collection.json
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/business-rest-api
+  - type: APIReference
+    url: https://developer-docs.paga.com/docs/business-rest-api-operations
+  - type: Documentation
+    url: https://developer-docs.paga.com/docs/direct-debit-api
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/paga/overview
 - type: AgenticAccess
   url: agentic-access/paga-agentic-access.yml
 - type: TrustCenter
