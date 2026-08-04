@@ -1,0 +1,414 @@
+{
+  "info": {
+    "_postman_id": "2b6f16ef-dd1e-402f-8ced-cc89a59bb12f",
+    "name": "Paga Developer Business Direct Debit API",
+    "description": "Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.\n\nContact Support:\n Name: Paga Developer Support\n Email: businesssupport@paga.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:03.000Z",
+    "updatedAt": "2026-07-28T02:31:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b6f16ef-dd1e-402f-8ced-cc89a59bb12f"
+  },
+  "item": [
+    {
+      "name": "chargeDebitMandate",
+      "item": [
+        {
+          "name": "Charge a tokenized bank account (mandate)",
+          "id": "6c66d2e7-89cd-4faa-987f-5328b79e66c0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"accountReference\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/chargeDebitMandate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "chargeDebitMandate"
+              ]
+            },
+            "description": "Debits an approved, tokenized customer bank account for one-time or recurring payment. hash = SHA-512(referenceNumber + amount + accountReference + hashKey)."
+          },
+          "response": [
+            {
+              "id": "a020ed08-17fe-4097-8fc6-e2d0db34cef8",
+              "name": "Charge submitted.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"accountReference\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/chargeDebitMandate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "chargeDebitMandate"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-a020ed08-17fe-4097-8fc6-e2d0db34cef8"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-6c66d2e7-89cd-4faa-987f-5328b79e66c0"
+        }
+      ],
+      "id": "66b348d2-f537-4dce-9d57-90b688a1d738",
+      "createdAt": "2026-07-28T02:31:04.000Z",
+      "updatedAt": "2026-07-28T02:31:04.000Z",
+      "uid": "35240-66b348d2-f537-4dce-9d57-90b688a1d738"
+    },
+    {
+      "name": "getChargeMandateStatus",
+      "item": [
+        {
+          "name": "Check a direct-debit charge status",
+          "id": "11fcc7c3-ba82-4ff5-97e8-1a1a8ce0afd1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/getChargeMandateStatus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getChargeMandateStatus"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c30a656f-3f38-40bf-be2e-b218b9b1d9c2",
+              "name": "Charge status returned.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/getChargeMandateStatus",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getChargeMandateStatus"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-c30a656f-3f38-40bf-be2e-b218b9b1d9c2"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-11fcc7c3-ba82-4ff5-97e8-1a1a8ce0afd1"
+        }
+      ],
+      "id": "b5c4fa92-df40-4248-9985-4d1a0e44847b",
+      "createdAt": "2026-07-28T02:31:04.000Z",
+      "updatedAt": "2026-07-28T02:31:04.000Z",
+      "uid": "35240-b5c4fa92-df40-4248-9985-4d1a0e44847b"
+    },
+    {
+      "name": "disableMandate",
+      "item": [
+        {
+          "name": "Disable a direct-debit mandate",
+          "id": "b1973d30-a7fd-4087-b527-d0466c26aa54",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/disableMandate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "disableMandate"
+              ]
+            },
+            "description": "Revokes a previously approved mandate token."
+          },
+          "response": [
+            {
+              "id": "b4bbec26-1cfa-4fd7-8bcb-b2e48f85b9b9",
+              "name": "Mandate disabled.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/disableMandate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disableMandate"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-b4bbec26-1cfa-4fd7-8bcb-b2e48f85b9b9"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-b1973d30-a7fd-4087-b527-d0466c26aa54"
+        }
+      ],
+      "id": "22c7da1b-ed6a-48c5-824c-8f54166ddb3c",
+      "createdAt": "2026-07-28T02:31:04.000Z",
+      "updatedAt": "2026-07-28T02:31:04.000Z",
+      "uid": "35240-22c7da1b-ed6a-48c5-824c-8f54166ddb3c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hash",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.mypaga.com"
+    }
+  ]
+}

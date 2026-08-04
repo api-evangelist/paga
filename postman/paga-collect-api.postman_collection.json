@@ -1,0 +1,1050 @@
+{
+  "info": {
+    "_postman_id": "16a5bc12-08d3-4b23-a4cb-3cd80efad4e9",
+    "name": "Paga Developer Business Collect API",
+    "description": "Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.\n\nContact Support:\n Name: Paga Developer Support\n Email: businesssupport@paga.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:02.000Z",
+    "updatedAt": "2026-07-28T02:31:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-16a5bc12-08d3-4b23-a4cb-3cd80efad4e9"
+  },
+  "item": [
+    {
+      "name": "paymentRequest",
+      "item": [
+        {
+          "name": "Register a payment request",
+          "id": "dde5f4d0-37be-4a86-983b-ad97c244ab55",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"payer\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"bankId\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"financialIdentificationNumber\": \"<string>\"\n  },\n  \"payee\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"bankId\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"financialIdentificationNumber\": \"<string>\"\n  },\n  \"expiryDateTimeUTC\": \"<dateTime>\",\n  \"isSuppressMessages\": \"<boolean>\",\n  \"payerCollectionFeeShare\": \"<double>\",\n  \"payeeCollectionFeeShare\": \"<double>\",\n  \"callBackUrl\": \"<uri>\",\n  \"paymentMethods\": [\n    \"BANK_TRANSFER\",\n    \"PAGA\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/paymentRequest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "paymentRequest"
+              ]
+            },
+            "description": "Registers a new request for payment between a payer and payee. The payer is notified and can pay via bank transfer, USSD, card, agent, or Paga wallet; a callback is sent on fulfilment. The same path is used by the Direct Debit API to initiate bank-account mandate tokenization. hash = SHA-512(referenceNumber + amount + currency + payer.phoneNumber + payer.email + hashKey)."
+          },
+          "response": [
+            {
+              "id": "68a0f969-420d-4979-996c-9ddf6aa0df68",
+              "name": "Payment request registered.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"payer\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"bankId\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"financialIdentificationNumber\": \"<string>\"\n  },\n  \"payee\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"bankId\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"financialIdentificationNumber\": \"<string>\"\n  },\n  \"expiryDateTimeUTC\": \"<dateTime>\",\n  \"isSuppressMessages\": \"<boolean>\",\n  \"payerCollectionFeeShare\": \"<double>\",\n  \"payeeCollectionFeeShare\": \"<double>\",\n  \"callBackUrl\": \"<uri>\",\n  \"paymentMethods\": [\n    \"BANK_TRANSFER\",\n    \"PAGA\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/paymentRequest",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentRequest"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-68a0f969-420d-4979-996c-9ddf6aa0df68"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-dde5f4d0-37be-4a86-983b-ad97c244ab55"
+        }
+      ],
+      "id": "f350c81c-3175-413c-af03-c8cdd9d5900b",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-f350c81c-3175-413c-af03-c8cdd9d5900b"
+    },
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "Check payment request / mandate status",
+          "id": "581386ea-079b-4af9-af8f-b9e63f01abf8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "status"
+              ]
+            },
+            "description": "Returns the status of a submitted operation (payment request, persistent account creation, or direct-debit tokenization) by reference number, including any refund information. hash = SHA-512(referenceNumber + hashKey)."
+          },
+          "response": [
+            {
+              "id": "71cc2a06-75b6-4839-856f-f28c3fd7388a",
+              "name": "Status returned.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-71cc2a06-75b6-4839-856f-f28c3fd7388a"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-581386ea-079b-4af9-af8f-b9e63f01abf8"
+        }
+      ],
+      "id": "0f883894-d37e-4511-b244-0ac0fb392fd3",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-0f883894-d37e-4511-b244-0ac0fb392fd3"
+    },
+    {
+      "name": "refund",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "Refund or cancel a payment request (v2)",
+              "id": "0a2d25af-2890-463a-a520-ed243e25f8db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"refundAmount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refund/v2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refund",
+                    "v2"
+                  ]
+                },
+                "description": "Cancels or refunds a previously fulfilled or pending payment request."
+              },
+              "response": [
+                {
+                  "id": "132f0a99-ff5c-4a10-ab73-f56e96c44590",
+                  "name": "Refund processed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"refundAmount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refund/v2",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refund",
+                        "v2"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:31:03.000Z",
+                  "updatedAt": "2026-07-28T02:31:03.000Z",
+                  "uid": "35240-132f0a99-ff5c-4a10-ab73-f56e96c44590"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-0a2d25af-2890-463a-a520-ed243e25f8db"
+            }
+          ],
+          "id": "ce831bff-e1cf-4592-a585-8ef47943bbae",
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-ce831bff-e1cf-4592-a585-8ef47943bbae"
+        }
+      ],
+      "id": "f21df233-b496-49e7-92bd-f1bd75e6d9eb",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-f21df233-b496-49e7-92bd-f1bd75e6d9eb"
+    },
+    {
+      "name": "history",
+      "item": [
+        {
+          "name": "Retrieve collection history",
+          "id": "ad746b1a-ac94-4e3c-a38a-fdd472c986ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"startDateTimeUTC\": \"<dateTime>\",\n  \"endDateTimeUTC\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "history"
+              ]
+            },
+            "description": "Queries collection activity within a date range (maximum three months)."
+          },
+          "response": [
+            {
+              "id": "d1a35fa7-44c8-4207-94d7-9132449468cf",
+              "name": "History returned.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"startDateTimeUTC\": \"<dateTime>\",\n  \"endDateTimeUTC\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "history"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-d1a35fa7-44c8-4207-94d7-9132449468cf"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-ad746b1a-ac94-4e3c-a38a-fdd472c986ee"
+        }
+      ],
+      "id": "0ac8f30f-0e1a-4e25-8b41-7c83bf59e57e",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-0ac8f30f-0e1a-4e25-8b41-7c83bf59e57e"
+    },
+    {
+      "name": "registerPersistentPaymentAccount",
+      "item": [
+        {
+          "name": "Create a persistent payment account",
+          "id": "fecd907c-296b-4d76-89ff-a5ddec388f10",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"accountReference\": \"<string>\",\n  \"financialIdentificationNumber\": \"<string>\",\n  \"creditBankId\": \"<string>\",\n  \"creditBankAccountNumber\": \"<string>\",\n  \"callbackUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/registerPersistentPaymentAccount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registerPersistentPaymentAccount"
+              ]
+            },
+            "description": "Creates a reusable NUBAN account number assigned to a customer so the organization can collect payments any time via bank or Paga transfer."
+          },
+          "response": [
+            {
+              "id": "d66b04c5-4377-4aaf-9ad4-1a8b882c2223",
+              "name": "Persistent payment account created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"accountReference\": \"<string>\",\n  \"financialIdentificationNumber\": \"<string>\",\n  \"creditBankId\": \"<string>\",\n  \"creditBankAccountNumber\": \"<string>\",\n  \"callbackUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/registerPersistentPaymentAccount",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "registerPersistentPaymentAccount"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-d66b04c5-4377-4aaf-9ad4-1a8b882c2223"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-fecd907c-296b-4d76-89ff-a5ddec388f10"
+        }
+      ],
+      "id": "70c18a69-f6b5-474b-8692-db8b639d7a2f",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-70c18a69-f6b5-474b-8692-db8b639d7a2f"
+    },
+    {
+      "name": "getPersistentPaymentAccount",
+      "item": [
+        {
+          "name": "Retrieve a persistent payment account",
+          "id": "6cc9e4cb-2c7d-48ae-a5ad-f952970b403b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/getPersistentPaymentAccount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getPersistentPaymentAccount"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "518deb7f-9981-46c0-8855-b99cd7bbd783",
+              "name": "Account details returned.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/getPersistentPaymentAccount",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getPersistentPaymentAccount"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-518deb7f-9981-46c0-8855-b99cd7bbd783"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-6cc9e4cb-2c7d-48ae-a5ad-f952970b403b"
+        }
+      ],
+      "id": "92abdc57-0e56-4db6-9881-cdf2124367e7",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-92abdc57-0e56-4db6-9881-cdf2124367e7"
+    },
+    {
+      "name": "updatePersistentPaymentAccount",
+      "item": [
+        {
+          "name": "Update a persistent payment account",
+          "id": "6d7bc9a0-3d7b-46ce-af5d-684fab44a693",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"accountReference\": \"<string>\",\n  \"financialIdentificationNumber\": \"<string>\",\n  \"creditBankId\": \"<string>\",\n  \"creditBankAccountNumber\": \"<string>\",\n  \"callbackUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/updatePersistentPaymentAccount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "updatePersistentPaymentAccount"
+              ]
+            },
+            "description": "Modifies account properties except the NUBAN and account reference."
+          },
+          "response": [
+            {
+              "id": "07a08d39-06a0-4fb5-b205-f802b8605aa2",
+              "name": "Account updated.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"accountReference\": \"<string>\",\n  \"financialIdentificationNumber\": \"<string>\",\n  \"creditBankId\": \"<string>\",\n  \"creditBankAccountNumber\": \"<string>\",\n  \"callbackUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/updatePersistentPaymentAccount",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "updatePersistentPaymentAccount"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-07a08d39-06a0-4fb5-b205-f802b8605aa2"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-6d7bc9a0-3d7b-46ce-af5d-684fab44a693"
+        }
+      ],
+      "id": "df49b050-92f3-41a1-94db-a2bcb0065faf",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-df49b050-92f3-41a1-94db-a2bcb0065faf"
+    },
+    {
+      "name": "deletePersistentPaymentAccount",
+      "item": [
+        {
+          "name": "Delete a persistent payment account",
+          "id": "b51ef85b-31d9-495d-801b-ad08de29ff1c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/deletePersistentPaymentAccount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deletePersistentPaymentAccount"
+              ]
+            },
+            "description": "Removes a persistent payment identifier. Irreversible."
+          },
+          "response": [
+            {
+              "id": "c1c364d9-49b3-4efd-b2a9-e39c25c119d5",
+              "name": "Account deleted.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"accountReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/deletePersistentPaymentAccount",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "deletePersistentPaymentAccount"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:03.000Z",
+              "updatedAt": "2026-07-28T02:31:03.000Z",
+              "uid": "35240-c1c364d9-49b3-4efd-b2a9-e39c25c119d5"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:03.000Z",
+          "updatedAt": "2026-07-28T02:31:03.000Z",
+          "uid": "35240-b51ef85b-31d9-495d-801b-ad08de29ff1c"
+        }
+      ],
+      "id": "65219ca7-ac2c-46fe-8323-eb162ce01eb1",
+      "createdAt": "2026-07-28T02:31:03.000Z",
+      "updatedAt": "2026-07-28T02:31:03.000Z",
+      "uid": "35240-65219ca7-ac2c-46fe-8323-eb162ce01eb1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hash",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.mypaga.com"
+    }
+  ]
+}

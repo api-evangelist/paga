@@ -1,0 +1,597 @@
+{
+  "info": {
+    "_postman_id": "38a82df6-0b33-40ef-9836-ed89375f0717",
+    "name": "Paga Developer Business Reference API",
+    "description": "Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.\n\nContact Support:\n Name: Paga Developer Support\n Email: businesssupport@paga.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:10.000Z",
+    "updatedAt": "2026-07-28T02:31:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-38a82df6-0b33-40ef-9836-ed89375f0717"
+  },
+  "item": [
+    {
+      "name": "banks",
+      "item": [
+        {
+          "name": "Get supported banks (Collect)",
+          "id": "5fec3440-1c16-4983-a0df-9709bd81c941",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/banks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banks"
+              ]
+            },
+            "description": "Retrieves the list of supported banks and their unique Paga bank IDs, used to populate payer/payee objects. hash = SHA-512(referenceNumber + hashKey)."
+          },
+          "response": [
+            {
+              "id": "2a7abfd4-134a-4054-88a4-2888b0de3a55",
+              "name": "Bank list returned.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/banks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "banks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:31:10.000Z",
+              "updatedAt": "2026-07-28T02:31:10.000Z",
+              "uid": "35240-2a7abfd4-134a-4054-88a4-2888b0de3a55"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:10.000Z",
+          "updatedAt": "2026-07-28T02:31:10.000Z",
+          "uid": "35240-5fec3440-1c16-4983-a0df-9709bd81c941"
+        }
+      ],
+      "id": "8080f4d8-d5e7-40c4-a18a-07171488c72c",
+      "createdAt": "2026-07-28T02:31:10.000Z",
+      "updatedAt": "2026-07-28T02:31:10.000Z",
+      "uid": "35240-8080f4d8-d5e7-40c4-a18a-07171488c72c"
+    },
+    {
+      "name": "paga-webservices",
+      "item": [
+        {
+          "name": "business-rest",
+          "item": [
+            {
+              "name": "secured",
+              "item": [
+                {
+                  "name": "getBanks",
+                  "item": [
+                    {
+                      "name": "Get supported banks (Business)",
+                      "id": "81c6131c-f5c2-4424-8eb4-064e9ed63faf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "principal",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getBanks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "paga-webservices",
+                            "business-rest",
+                            "secured",
+                            "getBanks"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5613cc0e-88db-4fed-8917-fe51864757f5",
+                          "name": "Bank list returned.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "principal",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getBanks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paga-webservices",
+                                "business-rest",
+                                "secured",
+                                "getBanks"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:31:10.000Z",
+                          "updatedAt": "2026-07-28T02:31:10.000Z",
+                          "uid": "35240-5613cc0e-88db-4fed-8917-fe51864757f5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:31:10.000Z",
+                      "updatedAt": "2026-07-28T02:31:10.000Z",
+                      "uid": "35240-81c6131c-f5c2-4424-8eb4-064e9ed63faf"
+                    }
+                  ],
+                  "id": "f25f4008-1bb4-46e0-aee4-fb06355357cc",
+                  "createdAt": "2026-07-28T02:31:10.000Z",
+                  "updatedAt": "2026-07-28T02:31:10.000Z",
+                  "uid": "35240-f25f4008-1bb4-46e0-aee4-fb06355357cc"
+                },
+                {
+                  "name": "getMobileOperators",
+                  "item": [
+                    {
+                      "name": "Get mobile operators",
+                      "id": "c8abd809-afc3-40ae-ae3a-d95fee3105f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "principal",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getMobileOperators",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "paga-webservices",
+                            "business-rest",
+                            "secured",
+                            "getMobileOperators"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "0d259037-59d6-4074-87c4-c97905ed2c79",
+                          "name": "Operator list returned.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "principal",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getMobileOperators",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paga-webservices",
+                                "business-rest",
+                                "secured",
+                                "getMobileOperators"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:31:10.000Z",
+                          "updatedAt": "2026-07-28T02:31:10.000Z",
+                          "uid": "35240-0d259037-59d6-4074-87c4-c97905ed2c79"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:31:10.000Z",
+                      "updatedAt": "2026-07-28T02:31:10.000Z",
+                      "uid": "35240-c8abd809-afc3-40ae-ae3a-d95fee3105f4"
+                    }
+                  ],
+                  "id": "0b3e8f00-041a-48c1-9702-5672a83e6565",
+                  "createdAt": "2026-07-28T02:31:10.000Z",
+                  "updatedAt": "2026-07-28T02:31:10.000Z",
+                  "uid": "35240-0b3e8f00-041a-48c1-9702-5672a83e6565"
+                },
+                {
+                  "name": "getOperationStatus",
+                  "item": [
+                    {
+                      "name": "Get operation status",
+                      "id": "a0782e5c-734d-44d7-b154-f884cba66b31",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "principal",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getOperationStatus",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "paga-webservices",
+                            "business-rest",
+                            "secured",
+                            "getOperationStatus"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "fdc77811-067e-482b-9ff3-c21f36f23781",
+                          "name": "Operation status returned.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "principal",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paga-webservices/business-rest/secured/getOperationStatus",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paga-webservices",
+                                "business-rest",
+                                "secured",
+                                "getOperationStatus"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responseCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:31:10.000Z",
+                          "updatedAt": "2026-07-28T02:31:10.000Z",
+                          "uid": "35240-fdc77811-067e-482b-9ff3-c21f36f23781"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:31:10.000Z",
+                      "updatedAt": "2026-07-28T02:31:10.000Z",
+                      "uid": "35240-a0782e5c-734d-44d7-b154-f884cba66b31"
+                    }
+                  ],
+                  "id": "2e199d8f-fab4-4a56-9f06-2583edf05b2c",
+                  "createdAt": "2026-07-28T02:31:10.000Z",
+                  "updatedAt": "2026-07-28T02:31:10.000Z",
+                  "uid": "35240-2e199d8f-fab4-4a56-9f06-2583edf05b2c"
+                }
+              ],
+              "id": "19d7c4f1-da16-4666-8196-96d59baa918c",
+              "createdAt": "2026-07-28T02:31:10.000Z",
+              "updatedAt": "2026-07-28T02:31:10.000Z",
+              "uid": "35240-19d7c4f1-da16-4666-8196-96d59baa918c"
+            }
+          ],
+          "id": "7385d642-e884-45a3-bb99-833ace7628bd",
+          "createdAt": "2026-07-28T02:31:10.000Z",
+          "updatedAt": "2026-07-28T02:31:10.000Z",
+          "uid": "35240-7385d642-e884-45a3-bb99-833ace7628bd"
+        }
+      ],
+      "id": "527fd33f-2b68-4537-8be6-a0717fb08452",
+      "createdAt": "2026-07-28T02:31:10.000Z",
+      "updatedAt": "2026-07-28T02:31:10.000Z",
+      "uid": "35240-527fd33f-2b68-4537-8be6-a0717fb08452"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hash",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.mypaga.com"
+    }
+  ]
+}
