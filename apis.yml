@@ -31,7 +31,7 @@ tags:
 - Nigeria
 created: '2026-07-17'
 modified: '2026-07-17'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: paga:paga-connect-api
   name: Paga Connect
