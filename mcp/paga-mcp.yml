@@ -2,42 +2,88 @@ generated: '2026-07-17'
 method: derived
 status: candidate
 source: openapi/paga-openapi.yml
-description: >-
-  Candidate MCP server tool list derived one-to-one from the modeled Paga
-  OpenAPI operations. Paga does not publish an official hosted/remote MCP server
-  at review time; this is a governance starting point for exposing Paga's
-  payment surfaces to AI agents. Money-movement tools (moneyTransfer,
-  merchantPayment, depositToBank, chargeDebitMandate, refundPaymentV2,
-  airtimePurchase) debit real NGN funds and should be gated behind
-  human-in-the-loop per agentic-access/paga-agentic-access.yml.
+description: Candidate MCP server tool list derived one-to-one from the modeled Paga OpenAPI operations.
+  Paga does not publish an official hosted/remote MCP server at review time; this is a governance starting
+  point for exposing Paga's payment surfaces to AI agents. Money-movement tools (moneyTransfer, merchantPayment,
+  depositToBank, chargeDebitMandate, refundPaymentV2, airtimePurchase) debit real NGN funds and should
+  be gated behind human-in-the-loop per agentic-access/paga-agentic-access.yml.
 server:
   name: paga
   transport: stdio
   url: null
 tools:
-# Collect API
-- {name: request_payment, description: Register a payment request, source_operation: openapi/paga-openapi.yml#requestPayment}
-- {name: check_status, description: Check payment request / mandate status, source_operation: openapi/paga-openapi.yml#checkStatus}
-- {name: refund_payment, description: Refund or cancel a payment request, source_operation: openapi/paga-openapi.yml#refundPaymentV2}
-- {name: retrieve_history, description: Retrieve collection history, source_operation: openapi/paga-openapi.yml#retrieveHistory}
-- {name: get_collect_banks, description: Get supported banks (Collect), source_operation: openapi/paga-openapi.yml#getCollectBanks}
-- {name: register_persistent_payment_account, description: Create a persistent NUBAN payment account, source_operation: openapi/paga-openapi.yml#registerPersistentPaymentAccount}
-- {name: get_persistent_payment_account, description: Retrieve a persistent payment account, source_operation: openapi/paga-openapi.yml#getPersistentPaymentAccount}
-- {name: update_persistent_payment_account, description: Update a persistent payment account, source_operation: openapi/paga-openapi.yml#updatePersistentPaymentAccount}
-- {name: delete_persistent_payment_account, description: Delete a persistent payment account, source_operation: openapi/paga-openapi.yml#deletePersistentPaymentAccount}
-# Direct Debit API
-- {name: charge_debit_mandate, description: Charge a tokenized bank account (mandate), source_operation: openapi/paga-openapi.yml#chargeDebitMandate}
-- {name: get_charge_mandate_status, description: Check a direct-debit charge status, source_operation: openapi/paga-openapi.yml#getChargeMandateStatus}
-- {name: disable_mandate, description: Disable a direct-debit mandate, source_operation: openapi/paga-openapi.yml#disableMandate}
-# Business API
-- {name: money_transfer, description: Money transfer / disbursement, source_operation: openapi/paga-openapi.yml#moneyTransfer}
-- {name: airtime_purchase, description: Airtime and data purchase, source_operation: openapi/paga-openapi.yml#airtimePurchase}
-- {name: merchant_payment, description: Merchant / bill payment, source_operation: openapi/paga-openapi.yml#merchantPayment}
-- {name: deposit_to_bank, description: Deposit to a bank account, source_operation: openapi/paga-openapi.yml#depositToBank}
-- {name: validate_deposit_to_bank, description: Validate a bank deposit (name enquiry), source_operation: openapi/paga-openapi.yml#validateDepositToBank}
-- {name: account_balance, description: Get account balance, source_operation: openapi/paga-openapi.yml#accountBalance}
-- {name: get_business_banks, description: Get supported banks (Business), source_operation: openapi/paga-openapi.yml#getBusinessBanks}
-- {name: get_mobile_operators, description: Get mobile operators, source_operation: openapi/paga-openapi.yml#getMobileOperators}
-- {name: get_operation_status, description: Get operation status, source_operation: openapi/paga-openapi.yml#getOperationStatus}
-- {name: transaction_history, description: Get transaction history, source_operation: openapi/paga-openapi.yml#transactionHistory}
-- {name: register_customer, description: Register a customer wallet, source_operation: openapi/paga-openapi.yml#registerCustomer}
+- name: request_payment
+  description: Register a payment request
+  source_operation: openapi/paga-openapi.yml#requestPayment
+- name: check_status
+  description: Check payment request / mandate status
+  source_operation: openapi/paga-openapi.yml#checkStatus
+- name: refund_payment
+  description: Refund or cancel a payment request
+  source_operation: openapi/paga-openapi.yml#refundPaymentV2
+- name: retrieve_history
+  description: Retrieve collection history
+  source_operation: openapi/paga-openapi.yml#retrieveHistory
+- name: get_collect_banks
+  description: Get supported banks (Collect)
+  source_operation: openapi/paga-openapi.yml#getCollectBanks
+- name: register_persistent_payment_account
+  description: Create a persistent NUBAN payment account
+  source_operation: openapi/paga-openapi.yml#registerPersistentPaymentAccount
+- name: get_persistent_payment_account
+  description: Retrieve a persistent payment account
+  source_operation: openapi/paga-openapi.yml#getPersistentPaymentAccount
+- name: update_persistent_payment_account
+  description: Update a persistent payment account
+  source_operation: openapi/paga-openapi.yml#updatePersistentPaymentAccount
+- name: delete_persistent_payment_account
+  description: Delete a persistent payment account
+  source_operation: openapi/paga-openapi.yml#deletePersistentPaymentAccount
+- name: charge_debit_mandate
+  description: Charge a tokenized bank account (mandate)
+  source_operation: openapi/paga-openapi.yml#chargeDebitMandate
+- name: get_charge_mandate_status
+  description: Check a direct-debit charge status
+  source_operation: openapi/paga-openapi.yml#getChargeMandateStatus
+- name: disable_mandate
+  description: Disable a direct-debit mandate
+  source_operation: openapi/paga-openapi.yml#disableMandate
+- name: money_transfer
+  description: Money transfer / disbursement
+  source_operation: openapi/paga-openapi.yml#moneyTransfer
+- name: airtime_purchase
+  description: Airtime and data purchase
+  source_operation: openapi/paga-openapi.yml#airtimePurchase
+- name: merchant_payment
+  description: Merchant / bill payment
+  source_operation: openapi/paga-openapi.yml#merchantPayment
+- name: deposit_to_bank
+  description: Deposit to a bank account
+  source_operation: openapi/paga-openapi.yml#depositToBank
+- name: validate_deposit_to_bank
+  description: Validate a bank deposit (name enquiry)
+  source_operation: openapi/paga-openapi.yml#validateDepositToBank
+- name: account_balance
+  description: Get account balance
+  source_operation: openapi/paga-openapi.yml#accountBalance
+- name: get_business_banks
+  description: Get supported banks (Business)
+  source_operation: openapi/paga-openapi.yml#getBusinessBanks
+- name: get_mobile_operators
+  description: Get mobile operators
+  source_operation: openapi/paga-openapi.yml#getMobileOperators
+- name: get_operation_status
+  description: Get operation status
+  source_operation: openapi/paga-openapi.yml#getOperationStatus
+- name: transaction_history
+  description: Get transaction history
+  source_operation: openapi/paga-openapi.yml#transactionHistory
+- name: register_customer
+  description: Register a customer wallet
+  source_operation: openapi/paga-openapi.yml#registerCustomer
+deployment:
+  mode: none
+  verified: derived
+  tools: 23
+  checked: '2026-08-12'
+  source: catalog MCP census

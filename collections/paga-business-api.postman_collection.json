@@ -1,0 +1,1039 @@
+{
+  "item": [
+    {
+      "id": "9628fd65-615b-40c0-a771-6d5f7932b85a",
+      "name": "Business",
+      "description": {
+        "content": "Disbursements, airtime/data, merchant payments, deposits, onboarding.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acbdb5fc-2ef9-47fe-b344-85ea2b845bd6",
+          "name": "Money transfer / disbursement",
+          "request": {
+            "name": "Money transfer / disbursement",
+            "description": {
+              "content": "Transfers money from the business Paga account to a recipient phone number or bank account. hash = SHA-512(referenceNumber + amount + destinationAccount + destinationBank + hashKey).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "moneyTransfer"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-moneyTransfer-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationAccount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"destinationBank\": \"<string>\",\n  \"senderPrincipal\": \"<string>\",\n  \"sendWithdrawalCode\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "516f37a4-bbfc-41dd-8ddb-e3e9c1651207",
+              "name": "Transfer processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "moneyTransfer"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-moneyTransfer-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationAccount\": \"<string>\",\n  \"currency\": \"NGN\",\n  \"destinationBank\": \"<string>\",\n  \"senderPrincipal\": \"<string>\",\n  \"sendWithdrawalCode\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6ddf075-ab1d-411c-a766-37d89eb761ed",
+          "name": "Airtime & data purchase",
+          "request": {
+            "name": "Airtime & data purchase",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "airtimePurchase"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-airtimePurchase-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationPhoneNumber\": \"<string>\",\n  \"mobileOperatorPublicId\": \"<string>\",\n  \"isDataBundle\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aebd2872-dbbe-46d4-8cf3-776d8d01f31c",
+              "name": "Purchase processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "airtimePurchase"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-airtimePurchase-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationPhoneNumber\": \"<string>\",\n  \"mobileOperatorPublicId\": \"<string>\",\n  \"isDataBundle\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "956bc888-211e-43e3-9590-efb0182dec21",
+          "name": "Merchant / bill payment",
+          "request": {
+            "name": "Merchant / bill payment",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "merchantPayment"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-merchantPayment-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"merchantAccount\": \"<string>\",\n  \"merchantReferenceNumber\": \"<string>\",\n  \"merchantService\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbdfbf9b-63b4-4656-9dcf-ef460178791c",
+              "name": "Merchant payment processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "merchantPayment"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-merchantPayment-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"merchantAccount\": \"<string>\",\n  \"merchantReferenceNumber\": \"<string>\",\n  \"merchantService\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bc4a9d6-a670-4f4d-8d2a-6d074cfc3ced",
+          "name": "Deposit to bank account",
+          "request": {
+            "name": "Deposit to bank account",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "depositToBank"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-depositToBank-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationBankUUID\": \"<string>\",\n  \"destinationBankAccountNumber\": \"<string>\",\n  \"recipientPhoneNumber\": \"<string>\",\n  \"recipientEmail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2811e69-9afb-4f7a-ae5d-285835450681",
+              "name": "Deposit processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "depositToBank"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-depositToBank-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationBankUUID\": \"<string>\",\n  \"destinationBankAccountNumber\": \"<string>\",\n  \"recipientPhoneNumber\": \"<string>\",\n  \"recipientEmail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28bb5e5f-739c-4543-8238-563e160cfac6",
+          "name": "Validate a bank deposit (name enquiry)",
+          "request": {
+            "name": "Validate a bank deposit (name enquiry)",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "validateDepositToBank"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-validateDepositToBank-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationBankUUID\": \"<string>\",\n  \"destinationBankAccountNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f96fe7b-121e-43e0-9276-d5f3f2dd8384",
+              "name": "Account name resolved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "validateDepositToBank"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-validateDepositToBank-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"destinationBankUUID\": \"<string>\",\n  \"destinationBankAccountNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc3e1a7e-7ce4-4e19-a865-19116e19b5c4",
+          "name": "Account balance",
+          "request": {
+            "name": "Account balance",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "accountBalance"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-accountBalance-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"sourceOfFunds\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c511ff8f-f71b-4c3d-95cb-a3438a930da7",
+              "name": "Balance returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "accountBalance"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-accountBalance-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"sourceOfFunds\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ba6459c-3486-450a-974e-2ecd152352d6",
+          "name": "Transaction history",
+          "request": {
+            "name": "Transaction history",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "transactionHistory"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-transactionHistory-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"startDateUTC\": \"<dateTime>\",\n  \"endDateUTC\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "698460d7-229c-42f8-a1a8-ad6a2c9ac3d1",
+              "name": "History returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "transactionHistory"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-transactionHistory-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"startDateUTC\": \"<dateTime>\",\n  \"endDateUTC\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e9f03c9-ada9-4c7a-bd9a-b38b32432d62",
+          "name": "Register a customer",
+          "request": {
+            "name": "Register a customer",
+            "description": {
+              "content": "Creates a Paga customer wallet on behalf of the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "registerCustomer"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-registerCustomer-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"customerPhoneNumber\": \"<string>\",\n  \"customerFirstName\": \"<string>\",\n  \"customerLastName\": \"<string>\",\n  \"customerEmail\": \"<string>\",\n  \"customerDateOfBirth\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72e10c40-ad5b-4043-ad60-b12d750d78f7",
+              "name": "Customer registered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "registerCustomer"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-registerCustomer-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"customerPhoneNumber\": \"<string>\",\n  \"customerFirstName\": \"<string>\",\n  \"customerLastName\": \"<string>\",\n  \"customerEmail\": \"<string>\",\n  \"customerDateOfBirth\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-moneyTransfer-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-airtimePurchase-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-merchantPayment-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-depositToBank-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-validateDepositToBank-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-accountBalance-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-transactionHistory-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-registerCustomer-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hash"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7aed20c6-a738-4f45-9ae2-40e6c1ccd6f6",
+    "name": "Paga Developer Business API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.\n\nContact Support:\n Name: Paga Developer Support\n Email: businesssupport@paga.com",
+      "type": "text/plain"
+    }
+  }
+}

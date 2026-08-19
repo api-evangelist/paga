@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paga Developer Business API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hash",
+      "value": "{{hash}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Business",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Money transfer / disbursement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Transfers money from the business Paga account to a recipient phone number or bank account. hash = SHA-512(referenceNumber + amount + destinationAccount + destinationBank + hashKey)."
+        },
+        {
+          "info": {
+            "name": "Airtime & data purchase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/airtimePurchase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Airtime & data purchase"
+        },
+        {
+          "info": {
+            "name": "Merchant / bill payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/merchantPayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Merchant / bill payment"
+        },
+        {
+          "info": {
+            "name": "Deposit to bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/depositToBank",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deposit to bank account"
+        },
+        {
+          "info": {
+            "name": "Validate a bank deposit (name enquiry)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/validateDepositToBank",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Validate a bank deposit (name enquiry)"
+        },
+        {
+          "info": {
+            "name": "Account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/accountBalance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Account balance"
+        },
+        {
+          "info": {
+            "name": "Transaction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/transactionHistory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Transaction history"
+        },
+        {
+          "info": {
+            "name": "Register a customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/registerCustomer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a Paga customer wallet on behalf of the organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paga Developer Business Direct Debit API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hash",
+      "value": "{{hash}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Direct Debit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Charge a tokenized bank account (mandate)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/chargeDebitMandate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Debits an approved, tokenized customer bank account for one-time or recurring payment. hash = SHA-512(referenceNumber + amount + accountReference + hashKey)."
+        },
+        {
+          "info": {
+            "name": "Check a direct-debit charge status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/getChargeMandateStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Check a direct-debit charge status"
+        },
+        {
+          "info": {
+            "name": "Disable a direct-debit mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/disableMandate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Revokes a previously approved mandate token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

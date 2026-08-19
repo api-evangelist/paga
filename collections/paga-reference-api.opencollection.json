@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paga Developer Business Reference API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hash",
+      "value": "{{hash}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get supported banks (Collect)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/banks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the list of supported banks and their unique Paga bank IDs, used to populate payer/payee objects. hash = SHA-512(referenceNumber + hashKey)."
+        },
+        {
+          "info": {
+            "name": "Get supported banks (Business)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/getBanks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get supported banks (Business)"
+        },
+        {
+          "info": {
+            "name": "Get mobile operators",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/getMobileOperators",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get mobile operators"
+        },
+        {
+          "info": {
+            "name": "Get operation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.mypaga.com/paga-webservices/business-rest/secured/getOperationStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "principal",
+              "value": "{{principal}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get operation status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

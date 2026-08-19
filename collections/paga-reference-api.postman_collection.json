@@ -1,0 +1,534 @@
+{
+  "item": [
+    {
+      "id": "e0c23b7a-fa91-45b1-84e3-1dc602ceee02",
+      "name": "Reference",
+      "description": {
+        "content": "Look-up operations - banks, mobile operators, status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b2dc327-d743-4788-a8ea-25b5a3ab70fd",
+          "name": "Get supported banks (Collect)",
+          "request": {
+            "name": "Get supported banks (Collect)",
+            "description": {
+              "content": "Retrieves the list of supported banks and their unique Paga bank IDs, used to populate payer/payee objects. hash = SHA-512(referenceNumber + hashKey).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "banks"
+              ],
+              "host": [
+                "{{banks-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7701a45b-d829-4749-8791-56df6f8afff5",
+              "name": "Bank list returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "banks"
+                  ],
+                  "host": [
+                    "{{banks-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8acc16d4-7174-4201-904d-7e593fb7dc23",
+          "name": "Get supported banks (Business)",
+          "request": {
+            "name": "Get supported banks (Business)",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "getBanks"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-getBanks-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b24f59a-ca93-4b6c-a18a-4849a3260158",
+              "name": "Bank list returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "getBanks"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-getBanks-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3ff3632-0aa9-4f8d-a189-fb18e222af4d",
+          "name": "Get mobile operators",
+          "request": {
+            "name": "Get mobile operators",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "getMobileOperators"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-getMobileOperators-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "426cfb8f-d9db-4168-bb9e-b68c435a3606",
+              "name": "Operator list returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "getMobileOperators"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-getMobileOperators-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7cd77e2-8718-4762-b906-61e37ea0f547",
+          "name": "Get operation status",
+          "request": {
+            "name": "Get operation status",
+            "description": {},
+            "url": {
+              "path": [
+                "paga-webservices",
+                "business-rest",
+                "secured",
+                "getOperationStatus"
+              ],
+              "host": [
+                "{{paga-webservices-business-rest-secured-getOperationStatus-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "principal"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6af75f5b-91cd-4ec9-a389-06a51e522bf4",
+              "name": "Operation status returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paga-webservices",
+                    "business-rest",
+                    "secured",
+                    "getOperationStatus"
+                  ],
+                  "host": [
+                    "{{paga-webservices-business-rest-secured-getOperationStatus-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "principal",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": 0,\n  \"message\": \"string\",\n  \"referenceNumber\": \"string\",\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://collect.paga.com",
+      "key": "banks-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-getBanks-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-getMobileOperators-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://www.mypaga.com",
+      "key": "paga-webservices-business-rest-secured-getOperationStatus-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hash"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bec22cb5-8bd6-4f58-856e-490b72753f03",
+    "name": "Paga Developer Business Reference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.\n\nContact Support:\n Name: Paga Developer Support\n Email: businesssupport@paga.com",
+      "type": "text/plain"
+    }
+  }
+}
