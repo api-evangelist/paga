@@ -27,6 +27,12 @@ tags:
 - Payments
 - Mobile Money
 - Fintech
+- Collection
+- Nigeria
+tags_raw:
+- Payments
+- Mobile Money
+- Fintech
 - Collections
 - Nigeria
 created: '2026-07-17'
@@ -36,6 +42,10 @@ apis:
 - aid: paga:paga-connect-api
   name: Paga Connect
   tags:
+  - Authentication
+  - Checkout
+  - Payments
+  tags_raw:
   - OAuth
   - Checkout
   - Payments
