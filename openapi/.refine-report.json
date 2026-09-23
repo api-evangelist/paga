@@ -1,10 +1,7 @@
 {
   "provider": "paga",
   "sources": [
-    "paga-business-api-openapi.yml",
-    "paga-collect-api-openapi.yml",
-    "paga-direct-debit-api-openapi.yml",
-    "paga-reference-api-openapi.yml"
+    "_original/paga-openapi.yml"
   ],
   "outputs": [
     "paga-business-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "paga-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "paga-business-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paga-collect-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paga-direct-debit-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paga-reference-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

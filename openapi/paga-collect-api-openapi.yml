@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Paga Developer Business Collect API
-  description: 'Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria. This document models three REST product surfaces: the Business API (disbursements, airtime/data, merchant payments, bank deposits, customer onboarding), the Collect API (NGN collections via payment requests and persistent payment account numbers), and the Direct Debit API (bank-account mandate tokenization and recurring charges). All amounts are in Nigerian Naira (NGN). Every request carries a SHA-512 `hash` header computed over an operation-specific ordered concatenation of parameters plus the account hash key.'
+  title: Paga Developer Collect API
+  description: Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company licensed by the Central Bank of Nigeria.
   version: '1.0'
   contact:
     name: Paga Developer Support
@@ -279,34 +279,6 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        phoneNumber:
-          type: string
-          example: '07022222222'
-        bankId:
-          type: string
-          description: Paga bank UUID (from /banks).
-        accountNumber:
-          type: string
-        financialIdentificationNumber:
-          type: string
-          description: BVN.
-    GenericResponse:
-      type: object
-      properties:
-        responseCode:
-          type: integer
-          example: 0
-        message:
-          type: string
-        referenceNumber:
-          type: string
-        transactionId:
-          type: string
     PersistentPaymentAccountRequest:
       type: object
       required:
@@ -333,6 +305,34 @@ components:
         callbackUrl:
           type: string
           format: uri
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+          example: '07022222222'
+        bankId:
+          type: string
+          description: Paga bank UUID (from /banks).
+        accountNumber:
+          type: string
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
     PaymentRequestRequest:
       type: object
       required:
