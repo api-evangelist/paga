@@ -279,60 +279,6 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
-    PersistentPaymentAccountRequest:
-      type: object
-      required:
-      - referenceNumber
-      - accountName
-      - phoneNumber
-      properties:
-        referenceNumber:
-          type: string
-        accountName:
-          type: string
-        phoneNumber:
-          type: string
-        accountReference:
-          type: string
-          description: Unique client identifier for the persistent account.
-        financialIdentificationNumber:
-          type: string
-          description: BVN.
-        creditBankId:
-          type: string
-        creditBankAccountNumber:
-          type: string
-        callbackUrl:
-          type: string
-          format: uri
-    GenericResponse:
-      type: object
-      properties:
-        responseCode:
-          type: integer
-          example: 0
-        message:
-          type: string
-        referenceNumber:
-          type: string
-        transactionId:
-          type: string
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        phoneNumber:
-          type: string
-          example: '07022222222'
-        bankId:
-          type: string
-          description: Paga bank UUID (from /banks).
-        accountNumber:
-          type: string
-        financialIdentificationNumber:
-          type: string
-          description: BVN.
     PaymentRequestRequest:
       type: object
       required:
@@ -378,6 +324,60 @@ components:
             - BANK_TRANSFER
             - FUNDING_USSD
             - PAGA
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
+    PersistentPaymentAccountRequest:
+      type: object
+      required:
+      - referenceNumber
+      - accountName
+      - phoneNumber
+      properties:
+        referenceNumber:
+          type: string
+        accountName:
+          type: string
+        phoneNumber:
+          type: string
+        accountReference:
+          type: string
+          description: Unique client identifier for the persistent account.
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
+        creditBankId:
+          type: string
+        creditBankAccountNumber:
+          type: string
+        callbackUrl:
+          type: string
+          format: uri
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+          example: '07022222222'
+        bankId:
+          type: string
+          description: Paga bank UUID (from /banks).
+        accountNumber:
+          type: string
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
   securitySchemes:
     basicAuth:
       type: http
