@@ -279,6 +279,34 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
+    Party:
+      type: object
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+          example: '07022222222'
+        bankId:
+          type: string
+          description: Paga bank UUID (from /banks).
+        accountNumber:
+          type: string
+        financialIdentificationNumber:
+          type: string
+          description: BVN.
+    GenericResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+          example: 0
+        message:
+          type: string
+        referenceNumber:
+          type: string
+        transactionId:
+          type: string
     PaymentRequestRequest:
       type: object
       required:
@@ -324,18 +352,6 @@ components:
             - BANK_TRANSFER
             - FUNDING_USSD
             - PAGA
-    GenericResponse:
-      type: object
-      properties:
-        responseCode:
-          type: integer
-          example: 0
-        message:
-          type: string
-        referenceNumber:
-          type: string
-        transactionId:
-          type: string
     PersistentPaymentAccountRequest:
       type: object
       required:
@@ -362,22 +378,6 @@ components:
         callbackUrl:
           type: string
           format: uri
-    Party:
-      type: object
-      properties:
-        name:
-          type: string
-        phoneNumber:
-          type: string
-          example: '07022222222'
-        bankId:
-          type: string
-          description: Paga bank UUID (from /banks).
-        accountNumber:
-          type: string
-        financialIdentificationNumber:
-          type: string
-          description: BVN.
   securitySchemes:
     basicAuth:
       type: http
