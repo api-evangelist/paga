@@ -1,4 +1,4 @@
-# Paga (paga)
+# Paga
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,131 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company founded in 2009 and licensed by the Central Bank of Nigeria. Its developer platform exposes REST APIs — the Business API, Collect API, and Direct Debit API — for disbursements, airtime/data and bill payments, bank deposits, and NGN collections via payment requests and persistent (NUBAN) account numbers. Authentication combines a principal/credential key pair with a per-request SHA-512 hash header.
+Paga (Pagatech Financial Services Limited) is a Nigerian mobile-money and payments company founded in 2009 and licensed by the Central Bank of Nigeria. Its developer platform exposes REST APIs - the Business API, Collect API, and Direct Debit API - for disbursements, airtime/data and bill payments, bank deposits, and NGN collections via payment requests and persistent (NUBAN) account numbers. Authentication combines a principal/credential key pair with a per-request SHA-512 hash header.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/paga/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/paga/refs/heads/main/apis.yml)
+**Areas:** Payments · Mobile Money · Fintech · Collection · Nigeria
 
-## Tags
+## Paga on APIs.io
 
-- Payments
-- Mobile Money
-- Fintech
-- Collections
-- Nigeria
+Everything profiled for Paga is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paga/](https://apis.io/providers/paga/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-07-17
-- **Modified:** 2026-07-17
+- [Paga Connect](https://apis.io/apis/paga/paga-connect-api/) — OAuth-based hosted checkout that lets third parties charge a customer's Paga wallet and read account/merchant details after the customer authorizes access.…
+- [Paga Business API](https://apis.io/apis/paga/paga-business-api/) — Disbursements, airtime/data, merchant payments, deposits, onboarding.
+- [Paga Collect API](https://apis.io/apis/paga/paga-collect-api/) — NGN collections - payment requests and persistent payment accounts.
+- [Paga Direct Debit API](https://apis.io/apis/paga/paga-direct-debit-api/) — Bank-account mandate tokenization and recurring debits.
+- [Paga Reference API](https://apis.io/apis/paga/paga-reference-api/) — Look-up operations - banks, mobile operators, status.
 
-## APIs
+### Published properties
 
-### Paga Collect API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Collect NGN payments from customers via payment requests (bank transfer, USSD, card, agent, or Paga wallet) and persistent NUBAN account numbers, with status checks, history, and refunds. HTTP Basic auth plus a per-operation SHA-512 hash header.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://developer-docs.paga.com/docs/paga-collect-api](https://developer-docs.paga.com/docs/paga-collect-api)
-- **Base URL:** `https://collect.paga.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Paga Webhooks](https://apis.io/asyncapis/paga/paga-webhooks/)
 
-- Collections
-- Payments
-- Persistent Payment Account
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://developer-docs.paga.com/docs/paga-collect-api)
-- [API Reference](https://developer-docs.paga.com/docs/operations-1)
-- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [paga](https://apis.io/servers/paga/paga/)
 
-### Paga Business API
+#### Agentic access (1)
 
-Integrate the Paga platform for money transfers, airtime/data purchase, merchant and bill payments, bank deposits, account balance, transaction history, and customer onboarding. `principal`/`credentials` header auth plus a per-operation SHA-512 hash header; requires IP whitelisting.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://developer-docs.paga.com/docs/business-rest-api](https://developer-docs.paga.com/docs/business-rest-api)
-- **Base URL:** `https://www.mypaga.com/paga-webservices/business-rest/secured`
+- [Paga Agentic Access](https://apis.io/agentic-access/paga/paga-agentic-access/)
 
-#### Tags
+#### Collections (8)
 
-- Disbursements
-- Airtime
-- Merchant Payment
+Postman and Open Collection request collections.
 
-#### Properties
+- [Paga Developer Business API](https://apis.io/collections/paga/open-paga-business-api/)
+- [Paga Developer Business Collect API](https://apis.io/collections/paga/open-paga-collect-api/)
+- [Paga Developer Business Direct Debit API](https://apis.io/collections/paga/open-paga-direct-debit-api/)
+- [Paga Developer Business Reference API](https://apis.io/collections/paga/open-paga-reference-api/)
+- [Paga Developer Business API](https://apis.io/collections/paga/postman-paga-business-api/)
+- [Paga Developer Business Collect API](https://apis.io/collections/paga/postman-paga-collect-api/)
+- [Paga Developer Business Direct Debit API](https://apis.io/collections/paga/postman-paga-direct-debit-api/)
+- [Paga Developer Business Reference API](https://apis.io/collections/paga/postman-paga-reference-api/)
 
-- [Documentation](https://developer-docs.paga.com/docs/business-rest-api)
-- [API Reference](https://developer-docs.paga.com/docs/business-rest-api-operations)
-- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+#### Overlays (1)
 
-### Paga Direct Debit API
+OpenAPI overlays, including conversational phrasing for each operation.
 
-Tokenize a customer bank account (mandate) and charge it for one-time or recurring debits, with mandate status checks and revocation. Shares the Collect API host and HTTP Basic + SHA-512 hash auth.
+- [Paga Openapi Overlay](https://apis.io/overlays/paga/paga-openapi-overlay/)
 
-- **Human URL:** [https://developer-docs.paga.com/docs/direct-debit-api](https://developer-docs.paga.com/docs/direct-debit-api)
-- **Base URL:** `https://collect.paga.com`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Direct Debit
-- Mandate
-- Tokenization
+- [Paga Authentication](https://apis.io/security/paga/paga-authentication/)
+- [Paga Domain Security](https://apis.io/security/paga/paga-domain-security/)
+- [Paga Trust Center](https://apis.io/security/paga/paga-trust-center/)
+- [Paga Vulnerability Disclosure](https://apis.io/security/paga/paga-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developer-docs.paga.com/docs/direct-debit-api)
-- [OpenAPI](openapi/paga-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paga.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Published plans, tiers and prices.
 
-### Paga Connect
+- [Paga Plans Pricing](https://apis.io/plans/paga/paga-plans-pricing/)
 
-OAuth-based hosted checkout that lets third parties charge a customer's Paga wallet and read account/merchant details after the customer authorizes access. Documented separately from the hash-authenticated REST surfaces.
+#### Rate limits (1)
 
-- **Human URL:** [https://developer-docs.paga.com/docs/paga-connect](https://developer-docs.paga.com/docs/paga-connect)
-- **Base URL:** `https://www.mypaga.com`
+Published request limits.
 
-#### Tags
+- [Paga Rate Limits](https://apis.io/rate-limits/paga/paga-rate-limits/)
 
-- OAuth
-- Checkout
-- Payments
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://developer-docs.paga.com/docs/paga-connect)
+- [Paga Finops](https://apis.io/finops/paga/paga-finops/)
 
-## Common Properties
+## Where to find this API
 
-- [Agentic Access](agentic-access/paga-agentic-access.yml)
-- [Trust Center](security/paga-trust-center.yml)
-- [Vulnerability Disclosure](security/paga-vulnerability-disclosure.yml)
-- [Domain Security](security/paga-domain-security.yml)
-- [Authentication](authentication/paga-authentication.yml)
-- [GitHub Organization](https://github.com/Paga-Developer-Community)
-- [LinkedIn](https://www.linkedin.com/company/paga-tech)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.paga.com/)
 - [Documentation](https://developer-docs.paga.com/)
-- [Plans](plans/paga-plans-pricing.yml)
-- [Rate Limits](rate-limits/paga-rate-limits.yml)
-- [Fin Ops](finops/paga-finops.yml)
+- [Support](https://www.paga.com/contact)
+- [Blog](https://paga.blog/)
+- [Terms of service](https://www.paga.com/terms)
+- [GitHub](https://github.com/Paga-Developer-Community)
+- [Status](https://status.paga.com)
 
-## Authentication
+## API Evangelist rating
 
-Paga issues three secrets from the Business Account dashboard (Developer Tools → API keys), with separate test and live sets:
+**Kin Score 45.7** — developing · rubric 0.25.0 · scored 2026-10-23
 
-- **principal** — public key / merchant public ID
-- **credentials** — secret key / password
-- **hash key** — HMAC key used to build the per-request `hash` header
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 52.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 55.4 |
+| Access clarity | 31.6 |
 
-Every operation carries a `hash` header: `SHA-512(<ordered operation parameters> + hashKey)`, concatenated with no separators. The Collect and Direct Debit APIs wrap the principal/credential pair in HTTP Basic (`base64(publicKey:secretKey)`); the Business API sends them as `principal` and `credentials` headers and additionally requires the caller's IP to be whitelisted. All amounts are in Nigerian Naira (NGN).
+**Agent readiness 34.9** — agent-ready
 
-## WebSocket Review
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
 
-Paga does **not** expose a documented public WebSocket API. All product surfaces are synchronous HTTPS REST; asynchronous events are delivered as outbound HTTP webhook callbacks to a merchant `callbackUrl`. See [review.yml](review.yml).
+**Regulatory alignment 35.7** — Payments
 
-## Maintainers
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paga/](https://apis.io/providers/paga/).
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Paga: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paga/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
